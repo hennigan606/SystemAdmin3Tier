@@ -19,7 +19,7 @@ namespace SystemAdminClasses
         public string Password { get; set; }
         public bool IsBanned { get; set; }
 
-        public virtual ICollection<AccessGroupWithUsers> Groups { get; set; }
+        public virtual ICollection<AccessGroupWithUser> GroupWithUser { get; set; }
 
     }
 
@@ -35,15 +35,15 @@ namespace SystemAdminClasses
         public int AccessGroupID { get; set; }
         public string GroupName { get; set; }
 
-        public virtual ICollection<AccessGroupWithUsers> Groups { get; set; }
+        public virtual ICollection<AccessGroupWithUser> GroupWithUser { get; set; }
 
     }
 
 
 
-    public class AccessGroupWithUsers
+    public class AccessGroupWithUser
     {
-        public AccessGroupWithUsers()
+        public AccessGroupWithUser()
         {
 
         }
