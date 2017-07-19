@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CRUD_Operations.cs" />
+    <Compile Include="Migrations\201707191918075_Initial.cs" />
+    <Compile Include="Migrations\201707191918075_Initial.Designer.cs">
+      <DependentUpon>201707191918075_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SystemAdminContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -59,6 +65,11 @@
       <Project>{d0c1b43e-52cb-4509-844d-1e7475647b77}</Project>
       <Name>SystemAdminClasses</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201707191918075_Initial.resx">
+      <DependentUpon>201707191918075_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
