@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 
 namespace SystemAdminClasses
 {
@@ -11,7 +9,6 @@ namespace SystemAdminClasses
         {
         }
 
-        [Key]
         public int UserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -19,7 +16,7 @@ namespace SystemAdminClasses
         public string Password { get; set; }
         public bool IsBanned { get; set; }
 
-        public virtual ICollection<AccessGroupWithUser> GroupWithUser { get; set; }
+        public virtual ICollection<UserAccessGroup> AccessGroups { get; set; }
 
     }
 
@@ -31,30 +28,10 @@ namespace SystemAdminClasses
         {
         }
 
-        [Key]
-        public int AccessGroupID { get; set; }
+        public int UserAccessGroupID { get; set; }
         public string GroupName { get; set; }
 
-        public virtual ICollection<AccessGroupWithUser> GroupWithUser { get; set; }
-
-    }
-
-
-
-    public class AccessGroupWithUser
-    {
-        public AccessGroupWithUser()
-        {
-
-        }
-
-        public int UserID { get; set; }
-        public int AccessGroupID { get; set; }
-
-        [ForeignKey("UserID")]
-        public virtual User User { get; set; }
-        [ForeignKey("AccessGroupID")]
-        public virtual UserAccessGroup UserAccessGroup { get; set; }
+        public virtual ICollection<User> Users { get; set; }
 
     }
 
@@ -66,8 +43,7 @@ namespace SystemAdminClasses
         {
         }
 
-        [Key]
-        public int RequestID { get; set; }
+        public int ServiceRequestID { get; set; }
         public string UserFullName { get; set; }
         public string RequestType { get; set; }
         public string Details { get; set; }
