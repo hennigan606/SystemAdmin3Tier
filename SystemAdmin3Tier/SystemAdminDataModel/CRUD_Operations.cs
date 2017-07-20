@@ -64,5 +64,38 @@ namespace SystemAdminDataModel
                 context.SaveChanges();
             }
         }
+
+
+
+        public List<User> GetAllUsers()
+        {
+            using (var context = new SystemAdminContext())
+            {
+                List<User> Users = context.Users.ToList();
+                return Users;
+            }
+        }
+
+
+
+        public List<UserAccessGroup> GetAllAccessGroups()
+        {
+            using (var context = new SystemAdminContext())
+            {
+                List<UserAccessGroup> AccessGroups = context.AccessGroups.ToList();
+                return AccessGroups;
+            }
+        }
+
+
+
+        public List<ServiceRequest> GetAllServiceRequests()
+        {
+            using (var context = new SystemAdminContext())
+            {
+                List<ServiceRequest> requests = context.ServiceRequests.ToList();
+                return requests;
+            }
+        }
     }
 }
