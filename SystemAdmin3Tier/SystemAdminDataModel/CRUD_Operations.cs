@@ -97,5 +97,21 @@ namespace SystemAdminDataModel
                 return requests;
             }
         }
+
+
+
+        public void AddUserToGroup(int UserID, string GroupName)
+        {
+            using (var context = new SystemAdminContext())
+            {
+                User user = context.Users.Where(n => n.UserID == UserID);
+                UserAccessGroup accessGroup = context.AccessGroups.Where(n =>
+                    n.GroupName == GroupName);
+                accessGroup.Users.Add(user);
+
+                context.AccessGroups.Add(accessGroup);
+                context.SaveChanges();
+            }
+        }
     }
 }
