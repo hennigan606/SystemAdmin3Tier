@@ -1,4 +1,7 @@
 ﻿using SystemAdminClasses;
+using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace SystemAdminDataModel
 {
@@ -25,6 +28,7 @@ namespace SystemAdminDataModel
 
             using (var context = new SystemAdminContext())
             {
+                context.Database.Log = Console.WriteLine;
                 context.Users.Add(user);
                 context.SaveChanges();
             }
@@ -38,6 +42,7 @@ namespace SystemAdminDataModel
 
             using (var context = new SystemAdminContext())
             {
+                context.Database.Log = Console.WriteLine;
                 context.AccessGroups.Add(userAccessGroup);
                 context.SaveChanges();
             }
@@ -46,20 +51,21 @@ namespace SystemAdminDataModel
 
 
         public void InsertServiceRequest(string UserFullName, string RequestType,
-            string Details, string AdminOperator, string AdditionalInfo)
+            string Details)
         {
             var serviceRequest = new ServiceRequest
             {
                 UserFullName = UserFullName,
                 RequestType = RequestType,
                 Details = Details,
-                AdminOperator = AdminOperator,
-                AdditionalInfo = AdditionalInfo,
+                AdminOperator = "",
+                AdditionalInfo = "",
                 Status = 0
             };
 
             using (var context = new SystemAdminContext())
             {
+                context.Database.Log = Console.WriteLine;
                 context.ServiceRequests.Add(serviceRequest);
                 context.SaveChanges();
             }
@@ -71,6 +77,7 @@ namespace SystemAdminDataModel
         {
             using (var context = new SystemAdminContext())
             {
+                context.Database.Log = Console.WriteLine;
                 List<User> Users = context.Users.ToList();
                 return Users;
             }
@@ -82,6 +89,7 @@ namespace SystemAdminDataModel
         {
             using (var context = new SystemAdminContext())
             {
+                context.Database.Log = Console.WriteLine;
                 List<UserAccessGroup> AccessGroups = context.AccessGroups.ToList();
                 return AccessGroups;
             }
@@ -93,6 +101,7 @@ namespace SystemAdminDataModel
         {
             using (var context = new SystemAdminContext())
             {
+                context.Database.Log = Console.WriteLine;
                 List<ServiceRequest> requests = context.ServiceRequests.ToList();
                 return requests;
             }
@@ -104,9 +113,11 @@ namespace SystemAdminDataModel
         {
             using (var context = new SystemAdminContext())
             {
-                User user = context.Users.Where(n => n.UserID == UserID);
+                context.Database.Log = Console.WriteLine;
+
+                User user = context.Users.Where(n => n.UserID == UserID).FirstOrDefault();
                 UserAccessGroup accessGroup = context.AccessGroups.Where(n =>
-                    n.GroupName == GroupName);
+                    n.GroupName == GroupName).FirstOrDefault();
                 accessGroup.Users.Add(user);
 
                 context.AccessGroups.Add(accessGroup);

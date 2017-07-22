@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{09589C87-FA76-419D-ABEF-D2B5F8B22072}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SystemAdminDataModel</RootNamespace>
-    <AssemblyName>SystemAdminDataModel</AssemblyName>
+    <ProjectGuid>{DE7BE174-7314-4E6C-A89B-572FF7BD31E6}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>DatabaseTesting</RootNamespace>
+    <AssemblyName>DatabaseTesting</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -47,16 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CRUD_Operations.cs" />
-    <Compile Include="Migrations\201707191918075_Initial.cs" />
-    <Compile Include="Migrations\201707191918075_Initial.Designer.cs">
-      <DependentUpon>201707191918075_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="SystemAdminContext.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -64,11 +61,10 @@
       <Project>{d0c1b43e-52cb-4509-844d-1e7475647b77}</Project>
       <Name>SystemAdminClasses</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201707191918075_Initial.resx">
-      <DependentUpon>201707191918075_Initial.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\SystemAdminDataModel\SystemAdminDataModel.csproj">
+      <Project>{09589c87-fa76-419d-abef-d2b5f8b22072}</Project>
+      <Name>SystemAdminDataModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
