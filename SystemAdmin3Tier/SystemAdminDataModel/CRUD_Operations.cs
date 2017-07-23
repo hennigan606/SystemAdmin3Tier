@@ -109,7 +109,35 @@ namespace SystemAdminDataModel
 
 
 
-        public void AddUserToGroup(int UserID, string GroupName)
+        public void BanUser(int UserID)
+        {
+            using (var context = new SystemAdminContext())
+            {
+                context.Database.Log = Console.WriteLine;
+
+                User user = context.Users.Where(n => n.UserID == UserID).FirstOrDefault();
+                user.IsBanned = true;
+                context.SaveChanges();
+            }
+        }
+
+
+
+        public void LiftBanOnUser(int UserID)
+        {
+            using (var context = new SystemAdminContext())
+            {
+                context.Database.Log = Console.WriteLine;
+
+                User user = context.Users.Where(n => n.UserID == UserID).FirstOrDefault();
+                user.IsBanned = false;
+                context.SaveChanges();
+            }
+        }
+
+
+
+        public void AddUserToGroup(int UserID, int GroupID)
         {
             using (var context = new SystemAdminContext())
             {
@@ -117,12 +145,83 @@ namespace SystemAdminDataModel
 
                 User user = context.Users.Where(n => n.UserID == UserID).FirstOrDefault();
                 UserAccessGroup accessGroup = context.AccessGroups.Where(n =>
-                    n.GroupName == GroupName).FirstOrDefault();
+                    n.UserAccessGroupID == GroupID).FirstOrDefault();
+
                 accessGroup.Users.Add(user);
 
                 context.AccessGroups.Add(accessGroup);
                 context.SaveChanges();
             }
         }
+
+
+
+        public void RemoveUserFromGroup(int UserID, int GroupID)
+        {
+            using (var context = new SystemAdminContext())
+            {
+                context.Database.Log = Console.WriteLine;
+
+                UserAccessGroup group = context.AccessGroups.Find(GroupID);
+                User user = context.Users.Find(UserID);
+
+                context.Entry(group).Collection("Users").Load();
+                group.Users.Remove(user);
+                context.SaveChanges();
+            }
+        }
+
+
+
+        public void AssignAdminToRequest(int RequestID, string AdminName)
+        {
+            using (var context = new SystemAdminContext())
+            {
+                context.Database.Log = Console.WriteLine;
+
+                ServiceRequest request = context.ServiceRequests.Where(
+                    n => n.ServiceRequestID == RequestID).FirstOrDefault();
+
+                request.AdminOperator = AdminName;
+                request.Status = (RequestStatus)1;
+                context.SaveChanges();
+            }
+        }
+
+
+
+        public void ProvideInfo(int RequestID, string AdditionalInfo)
+        {
+            using (var context = new SystemAdminContext())
+            {
+                context.Database.Log = Console.WriteLine;
+
+                ServiceRequest request = context.ServiceRequests.Where(
+                    n => n.ServiceRequestID == RequestID).FirstOrDefault();
+
+                request.AdditionalInfo = AdditionalInfo;
+                context.SaveChanges();
+            }
+        }
+
+
+
+        public void MarkAsComplete(int RequestID)
+        {
+            using (var context = new SystemAdminContext())
+            {
+                context.Database.Log = Console.WriteLine;
+
+                ServiceRequest request = context.ServiceRequests.Where(
+                    n => n.ServiceRequestID == RequestID).FirstOrDefault();
+
+                request.Status = (RequestStatus)2;
+                context.SaveChanges();
+            }
+        }
+
+
+
+
     }
 }
