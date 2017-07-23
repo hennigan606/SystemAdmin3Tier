@@ -83,7 +83,11 @@ namespace DatabaseTesting
             //    Console.WriteLine("Request Status: " + request.Status);
             //}
 
+            //test.DeleteUser(1);
 
+            //test.DeleteAccessGroup(1);
+
+            //test.DeleteServiceRequest(1);
 
             Console.ReadLine();
         }

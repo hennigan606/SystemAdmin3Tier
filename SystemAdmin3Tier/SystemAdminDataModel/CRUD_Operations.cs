@@ -222,6 +222,44 @@ namespace SystemAdminDataModel
 
 
 
+        public void DeleteUser(int UserID)
+        {
+            using (var context = new SystemAdminContext())
+            {
+                context.Database.Log = Console.WriteLine;
 
+                User user = context.Users.Find(UserID);
+                context.Users.Remove(user);
+                context.SaveChanges();
+            }
+        }
+
+
+
+        public void DeleteAccessGroup(int AccessGroupID)
+        {
+            using (var context = new SystemAdminContext())
+            {
+                context.Database.Log = Console.WriteLine;
+
+                UserAccessGroup group = context.AccessGroups.Find(AccessGroupID);
+                context.AccessGroups.Remove(group);
+                context.SaveChanges();
+            }
+        }
+
+
+
+        public void DeleteServiceRequest(int RequestID)
+        {
+            using (var context = new SystemAdminContext())
+            {
+                context.Database.Log = Console.WriteLine;
+
+                ServiceRequest request = context.ServiceRequests.Find(RequestID);
+                context.ServiceRequests.Remove(request);
+                context.SaveChanges();
+            }
+        }
     }
 }
