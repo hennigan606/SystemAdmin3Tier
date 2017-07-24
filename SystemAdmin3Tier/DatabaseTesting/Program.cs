@@ -89,6 +89,13 @@ namespace DatabaseTesting
 
             //test.DeleteServiceRequest(1);
 
+            //test.RecordSuccessfulLogon();
+
+            //test.RecordFailedLogon();
+
+            //test.DeleteLogonAttempt(1);
+            //test.DeleteLogonAttempt(2);
+
             Console.ReadLine();
         }
     }

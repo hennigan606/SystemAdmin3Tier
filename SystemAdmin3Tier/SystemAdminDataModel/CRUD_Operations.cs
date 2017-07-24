@@ -261,5 +261,56 @@ namespace SystemAdminDataModel
                 context.SaveChanges();
             }
         }
+
+
+
+
+        public void RecordSuccessfulLogon()
+        {
+            using (var context = new SystemAdminContext())
+            {
+                context.Database.Log = Console.WriteLine;
+
+                LogonAttempt success = new LogonAttempt();
+                success.LogonSuccessful = true;
+                success.LogonDateTime = DateTime.Now;
+
+                context.LogonAttempts.Add(success);
+                context.SaveChanges();
+            }
+        }
+
+
+
+        public void RecordFailedLogon()
+        {
+            using (var context = new SystemAdminContext())
+            {
+                context.Database.Log = Console.WriteLine;
+
+                LogonAttempt failed = new LogonAttempt();
+                failed.LogonSuccessful = false;
+                failed.LogonDateTime = DateTime.Now;
+
+                context.LogonAttempts.Add(failed);
+                context.SaveChanges();
+            }
+        }
+
+
+
+        public void DeleteLogonAttempt(int LogonAttemptID)
+        {
+            using (var context = new SystemAdminContext())
+            {
+                context.Database.Log = Console.WriteLine;
+
+                LogonAttempt attempt = context.LogonAttempts.Where(
+                    n => n.LogonAttemptID == LogonAttemptID).FirstOrDefault();
+
+                context.LogonAttempts.Remove(attempt);
+                context.SaveChanges();
+            }
+        }
     }
 }

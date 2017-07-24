@@ -52,6 +52,10 @@
     <Compile Include="Migrations\201707191918075_Initial.Designer.cs">
       <DependentUpon>201707191918075_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707241955137_AddedLogonAttempt.cs" />
+    <Compile Include="Migrations\201707241955137_AddedLogonAttempt.Designer.cs">
+      <DependentUpon>201707241955137_AddedLogonAttempt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SystemAdminContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,6 +72,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201707191918075_Initial.resx">
       <DependentUpon>201707191918075_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707241955137_AddedLogonAttempt.resx">
+      <DependentUpon>201707241955137_AddedLogonAttempt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

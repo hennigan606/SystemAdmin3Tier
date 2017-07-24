@@ -8,5 +8,6 @@ namespace SystemAdminDataModel
         public DbSet<User> Users { get; set; }
         public DbSet<UserAccessGroup> AccessGroups { get; set; }
         public DbSet<ServiceRequest> ServiceRequests { get; set; }
+        public DbSet<LogonAttempt> LogonAttempts { get; set; }
     }
 }

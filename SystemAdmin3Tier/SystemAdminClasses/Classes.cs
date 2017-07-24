@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace SystemAdminClasses
 {
@@ -50,6 +51,20 @@ namespace SystemAdminClasses
         public string AdminOperator { get; set; }
         public string AdditionalInfo { get; set; }
         public RequestStatus Status { get; set; }
+
+    }
+
+
+
+    public class LogonAttempt
+    {
+        public LogonAttempt()
+        {
+        }
+
+        public int LogonAttemptID { get; set; }
+        public DateTime LogonDateTime { get; set; }
+        public bool LogonSuccessful { get; set; }
 
     }
 
