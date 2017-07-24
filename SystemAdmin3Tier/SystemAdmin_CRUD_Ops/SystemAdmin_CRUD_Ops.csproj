@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DE7BE174-7314-4E6C-A89B-572FF7BD31E6}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>DatabaseTesting</RootNamespace>
-    <AssemblyName>DatabaseTesting</AssemblyName>
+    <ProjectGuid>{592F8D04-BEDC-401E-9025-5009E85B9227}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SystemAdmin_CRUD_Ops</RootNamespace>
+    <AssemblyName>SystemAdmin_CRUD_Ops</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -49,12 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="CRUD_Operations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SystemAdminClasses\SystemAdminClasses.csproj">
@@ -65,10 +59,10 @@
       <Project>{09589c87-fa76-419d-abef-d2b5f8b22072}</Project>
       <Name>SystemAdminDataModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SystemAdmin_CRUD_Ops\SystemAdmin_CRUD_Ops.csproj">
-      <Project>{592f8d04-bedc-401e-9025-5009e85b9227}</Project>
-      <Name>SystemAdmin_CRUD_Ops</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

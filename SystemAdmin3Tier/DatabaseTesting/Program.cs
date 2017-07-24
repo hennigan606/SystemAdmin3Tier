@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SystemAdminClasses;
 using SystemAdminDataModel;
+using SystemAdmin_CRUD_Ops;
 
 namespace DatabaseTesting
 {
@@ -94,7 +95,15 @@ namespace DatabaseTesting
             //test.RecordFailedLogon();
 
             //test.DeleteLogonAttempt(1);
-            //test.DeleteLogonAttempt(2);
+            //test.DeleteLogonAttempt(3);
+
+            //List<LogonAttempt> attempts = test.GetAllLogonAttempts();
+            //foreach (LogonAttempt attempt in attempts)
+            //{
+            //    Console.WriteLine("LogonAttemptID: " + attempt.LogonAttemptID);
+            //    Console.WriteLine("Logon Attempt Time: " + attempt.LogonDateTime);
+            //    Console.WriteLine("Logon Attempt Successful? " + attempt.LogonSuccessful);
+            //}
 
             Console.ReadLine();
         }

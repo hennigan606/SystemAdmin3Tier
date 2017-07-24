@@ -1,9 +1,10 @@
 ﻿using SystemAdminClasses;
+using SystemAdminDataModel;
 using System.Collections.Generic;
 using System.Linq;
 using System;
 
-namespace SystemAdminDataModel
+namespace SystemAdmin_CRUD_Ops
 {
     public class CRUD_Operations
     {
@@ -310,6 +311,19 @@ namespace SystemAdminDataModel
 
                 context.LogonAttempts.Remove(attempt);
                 context.SaveChanges();
+            }
+        }
+
+
+
+        public List<LogonAttempt> GetAllLogonAttempts()
+        {
+            using (var context = new SystemAdminContext())
+            {
+                context.Database.Log = Console.WriteLine;
+
+                List<LogonAttempt> attempts = context.LogonAttempts.ToList();
+                return attempts;
             }
         }
     }
