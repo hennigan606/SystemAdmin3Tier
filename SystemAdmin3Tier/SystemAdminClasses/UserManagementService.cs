@@ -39,10 +39,10 @@ namespace SystemAdminClasses
             }
 
 
-            //Add the new user to the list of users in memory
-            Users.Add(new User(FirstName, LastName, Email, Password));
-            //Add the new user to the database.
+            //Add the new user to the list of users in the database
             CRUD.InsertUser(FirstName, LastName, Email, Password);
+            //Update the list of users in memory to reflect new user in database
+            Users = CRUD.GetAllUsers();
             return true;
         }
 
@@ -64,8 +64,6 @@ namespace SystemAdminClasses
                         foreach (UserAccessGroup Group in user.AccessGroups)
                         {
                             int GroupID = Group.UserAccessGroupID;
-                            //Remove access group from user in memory
-                            user.AccessGroups.Remove(Group);
                             //Remove user from access group in database
                             CRUD.RemoveUserFromGroup(user.UserID, GroupID);
                         }
@@ -75,15 +73,63 @@ namespace SystemAdminClasses
 
 
             //Now, delete the user from the system
-            foreach (User user in Users)
+            //Delete the user from the database
+            CRUD.DeleteUser(UserID);
+            //Update list of users in memory to reflect change to database
+            Users = CRUD.GetAllUsers();
+        }
+
+
+
+        //Temporarily bans the user with the given UserID from accessing the system
+        public void BanUser(int UserID)
+        {
+            //Ban the user in the database
+            CRUD.BanUser(UserID);
+            //Update the list of users in memory to reflect change in database
+            Users = CRUD.GetAllUsers();
+        }
+
+
+
+        //Removes the temporary ban on the user with the given UserID accessing the system
+        public void LiftBanOnUser(int UserID)
+        {
+            //Lift the ban on the user in the database
+            CRUD.LiftBanOnUser(UserID);
+            //Update the list of users in memory to reflect change in database
+            Users = CRUD.GetAllUsers();
+        }
+
+
+
+        //Adds the given UserID to the User Access Group with the given ID
+        public void AddUserToGroup(int UserID, int UserAccessGroupID)
+        {  
+            List<UserAccessGroup> groups = CRUD.GetAllAccessGroups();
+
+            foreach (UserAccessGroup Group in groups)
             {
-                //Find the user with the given UserID
-                if (user.UserID == UserID)
+                //Find the access group with the given ID
+                if (Group.UserAccessGroupID == UserAccessGroupID)
                 {
-                    //Delete the user in memory
-                    Users.Remove(user);
-                    //Delete the user from the database
-                    CRUD.DeleteUser(user.UserID);
+                    foreach (User user in Group.Users)
+                    {
+                        //Check if the user with the given ID is already in the group
+                        if (user.UserID == UserID)
+                        {
+                            //If the user is already in the access group, do nothing
+                            return;
+                        }
+                        else
+                        {
+                            //Otherwise, add the user to the access group
+                            //Add the user to the group in the database
+                            CRUD.AddUserToGroup(UserID, UserAccessGroupID);
+                            //Update the list of users in memory to reflect change to database
+                            Users = CRUD.GetAllUsers();
+                        }
+                    }
                 }
             }
         }
