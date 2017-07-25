@@ -136,6 +136,14 @@ namespace SystemAdminClasses
 
 
 
+        //Removes the given UserID from the user access group with the given ID
+        public void RemoveUserFromGroup(int UserID, int UserAccessGroupID)
+        {
+            //Remove the user from the access group in the database
+            CRUD.RemoveUserFromGroup(UserID, UserAccessGroupID);
+            //Update the list of users in memory to reflect change to database
+            Users = CRUD.GetAllUsers();
+        }
         
     }
 }
