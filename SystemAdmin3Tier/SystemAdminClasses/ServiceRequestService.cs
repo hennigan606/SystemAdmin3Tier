@@ -14,7 +14,6 @@ namespace SystemAdminClasses
     public class ServiceRequestService
     {
         public CRUD_Operations CRUD = new CRUD_Operations();
-
         public List<ServiceRequest> Requests { get; set;}
 
         public ServiceRequestService()
