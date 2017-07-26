@@ -37,6 +37,35 @@ namespace SystemAdminClasses
 
 
 
-        
+        //Assigns an admin operator to a service request
+        public void AssignOperator(int RequestID, String AdminName)
+        {
+            //Update the service request in the database
+            CRUD.AssignAdminToRequest(RequestID, AdminName);
+            //Update the list of service requests in memory to reflect change to database
+            Requests = CRUD.GetAllServiceRequests();
+        }
+
+
+
+        //Adds additional information on progress to completion to a service request
+        public void ProvideInfo(int RequestID, String Info)
+        {
+            //Update the service request in the database
+            CRUD.ProvideInfo(RequestID, Info);
+            //Update the list of service requests in memory to reflect change to database
+            Requests = CRUD.GetAllServiceRequests();
+        }
+
+
+
+        //Updates the status of a service request to Complete
+        public void MarkAsComplete(int RequestID)
+        {
+            //Update the service request in the database
+            CRUD.MarkAsComplete(RequestID);
+            //Update the list of service requests in memory to reflect change to database
+            Requests = CRUD.GetAllServiceRequests();
+        }
     }
 }
