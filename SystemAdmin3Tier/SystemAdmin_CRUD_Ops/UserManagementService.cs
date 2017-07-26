@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SystemAdmin_CRUD_Ops;
+using SystemAdminClasses;
 
-namespace SystemAdminClasses
+namespace SystemAdmin_CRUD_Ops
 {
     //UserManagementService stores a list of all users and has methods
     //for manipulating both individual users and the list of users
@@ -16,6 +13,8 @@ namespace SystemAdminClasses
         public CRUD_Operations CRUD = new CRUD_Operations();
         public List<User> Users { get; set; }
 
+        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(
+            "UserManagementService.cs");
 
         public UserManagementService()
         {
@@ -34,6 +33,9 @@ namespace SystemAdminClasses
                 //exists in the system, return false
                 if (user.Email.Equals(Email))
                 {
+                    //Log the failure to add the new user
+                    logger.Info("Add new user operation failed as a user already exists on the "
+                        + "system with the email provided.");
                     return false;
                 }
             }
@@ -43,6 +45,9 @@ namespace SystemAdminClasses
             CRUD.InsertUser(FirstName, LastName, Email, Password);
             //Update the list of users in memory to reflect new user in database
             Users = CRUD.GetAllUsers();
+            //Log the addition of the new user to the system
+            logger.Info("New user " + FirstName + " " + LastName +
+                " has been added to the system.");
             return true;
         }
 
@@ -77,6 +82,8 @@ namespace SystemAdminClasses
             CRUD.DeleteUser(UserID);
             //Update list of users in memory to reflect change to database
             Users = CRUD.GetAllUsers();
+            //Log the deletion of the user
+            logger.Info("User with ID " + UserID + " has been deleted from the system.");
         }
 
 
@@ -88,6 +95,9 @@ namespace SystemAdminClasses
             CRUD.BanUser(UserID);
             //Update the list of users in memory to reflect change in database
             Users = CRUD.GetAllUsers();
+            //Log that the user has been temporarily banned
+            logger.Info("User with ID " + UserID + " has been temporarily banned " +
+                "from accessing the system.");
         }
 
 
@@ -99,6 +109,9 @@ namespace SystemAdminClasses
             CRUD.LiftBanOnUser(UserID);
             //Update the list of users in memory to reflect change in database
             Users = CRUD.GetAllUsers();
+            //Log that the ban on the user has been lifted
+            logger.Info("Temporary ban on user with ID " + UserID + " from accessing the " +
+                "system has been removed.");
         }
 
 
@@ -118,6 +131,9 @@ namespace SystemAdminClasses
                         //Check if the user with the given ID is already in the group
                         if (user.UserID == UserID)
                         {
+                            //Log that no action was taken as the user is already in the group
+                            logger.Info("Add user to group operation cancelled as user "
+                                + UserID + " is already a member of group " + UserAccessGroupID);
                             //If the user is already in the access group, do nothing
                             return;
                         }
@@ -128,6 +144,9 @@ namespace SystemAdminClasses
                             CRUD.AddUserToGroup(UserID, UserAccessGroupID);
                             //Update the list of users in memory to reflect change to database
                             Users = CRUD.GetAllUsers();
+                            //Log the addition of the user to the access group
+                            logger.Info("User with ID " + UserID + " has been added to the " +
+                                "user access group with ID " + UserAccessGroupID);
                         }
                     }
                 }
@@ -143,6 +162,9 @@ namespace SystemAdminClasses
             CRUD.RemoveUserFromGroup(UserID, UserAccessGroupID);
             //Update the list of users in memory to reflect change to database
             Users = CRUD.GetAllUsers();
+            //Log the removal of the user from the access group
+            logger.Info("User with ID " + UserID + " has been removed from " +
+                "user access group with ID " + UserAccessGroupID);
         }
         
     }

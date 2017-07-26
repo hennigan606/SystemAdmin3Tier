@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SystemAdmin_CRUD_Ops;
+using SystemAdminClasses;
 
-namespace SystemAdminClasses
+namespace SystemAdmin_CRUD_Ops
 {
     //ServiceRequestTracker stores a list of all service requests and contains methods
     //for manipulating those requests, including creating requests, assigning an admin
@@ -15,6 +12,9 @@ namespace SystemAdminClasses
     {
         public CRUD_Operations CRUD = new CRUD_Operations();
         public List<ServiceRequest> Requests { get; set;}
+
+        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(
+            "ServiceRequestService.cs");
 
         public ServiceRequestService()
         {
@@ -32,6 +32,8 @@ namespace SystemAdminClasses
             //Update the list of service requests in memory to include new
             //request added to the database
             Requests = CRUD.GetAllServiceRequests();
+            //Log the creation of a new request
+            logger.Info("New service request submitted by user: " + UserFullName);
         }
 
 
@@ -43,6 +45,8 @@ namespace SystemAdminClasses
             CRUD.AssignAdminToRequest(RequestID, AdminName);
             //Update the list of service requests in memory to reflect change to database
             Requests = CRUD.GetAllServiceRequests();
+            //Log the assignment of an admin operator to the request
+            logger.Info(AdminName + " has been assigned to request number " + RequestID);
         }
 
 
@@ -54,6 +58,9 @@ namespace SystemAdminClasses
             CRUD.ProvideInfo(RequestID, Info);
             //Update the list of service requests in memory to reflect change to database
             Requests = CRUD.GetAllServiceRequests();
+            //Log the addition of information to the service request
+            logger.Info("The admin operator assigned to request number "
+                + RequestID + " has added addtional information to the request.");
         }
 
 
@@ -65,6 +72,8 @@ namespace SystemAdminClasses
             CRUD.MarkAsComplete(RequestID);
             //Update the list of service requests in memory to reflect change to database
             Requests = CRUD.GetAllServiceRequests();
+            //Log the completion of the service request
+            logger.Info("Request number " + RequestID + " has been completed.");
         }
     }
 }

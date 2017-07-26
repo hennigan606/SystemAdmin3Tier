@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SystemAdmin_CRUD_Ops;
+using SystemAdminClasses;
 
-namespace SystemAdminClasses
+namespace SystemAdmin_CRUD_Ops
 {
     public class LogonService
     {
         public CRUD_Operations CRUD = new CRUD_Operations();
         public List<UserAccessGroup> Groups { get; set; }
         public List<User> Users { get; set; }
+
+        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(
+            "LogonService.cs");
 
         public LogonService()
         {
@@ -28,8 +28,10 @@ namespace SystemAdminClasses
             //Return false if there are no users on the system
             if (Users.Count == 0)
             {
-                //Record the failed logon attempt
+                //Record the failed logon attempt in the database
                 CRUD.RecordFailedLogon();
+                //Log the failed logon attempt
+                logger.Info("User logon failed. There are no users on the system.");
                 return false;
             }
 
@@ -56,24 +58,32 @@ namespace SystemAdminClasses
             //Return false if the email provided does not belong to a user on the system
             if (countEmailMatches < 1)
             {
-                //Record the failed logon attempt
+                //Record the failed logon attempt in the database
                 CRUD.RecordFailedLogon();
+                //Log the failed logon attempt
+                logger.Info("User logon failed. The email provided" +
+                    " does not belong to a user in the system.");
                 return false;
             }
 
             //Return false if the user has entered an incorrect password
-            if (checkPassword != password)
+            if (checkPassword != Password)
             {
-                //Record the failed logon attempt
+                //Record the failed logon attempt in the database
                 CRUD.RecordFailedLogon();
+                //Log the failed logon attempt
+                logger.Info("User logon failed. The password entered was incorrect.");
                 return false;
             }
 
             //Return false if the user is temporarily banned
             if (checkIfBanned == true)
             {
-                //Record the failed logon attempt
+                //Record the failed logon attempt in the database
                 CRUD.RecordFailedLogon();
+                //Log the failed logon attempt
+                logger.Info("User logon failed. The user has been temporarily " +
+                    "banned from the system.");
                 return false;
             }
 
@@ -98,13 +108,18 @@ namespace SystemAdminClasses
             //If the user is not in the admins access group, return false
             if (checkPermissionUserIDFound == false)
             {
-                //Record the failed logon attempt
+                //Record the failed logon attempt in the database
                 CRUD.RecordFailedLogon();
+                //Log the failed logon attempt
+                logger.Info("User logon failed. The user does not have permission " +
+                    "to access this system.");
                 return false;
             }
 
-            //Record the successful logon attempt
+            //Record the successful logon attempt in the database
             CRUD.RecordSuccessfulLogon();
+            //Log the successful logon attempt
+            logger.Info("User Logon succeeded.");
             return true;
         }
     }
