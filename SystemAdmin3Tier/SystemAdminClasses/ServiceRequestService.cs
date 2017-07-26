@@ -13,9 +13,9 @@ namespace SystemAdminClasses
     //marking a request as complete
     public class ServiceRequestService
     {
-        CRUD_Operations CRUD = new CRUD_Operations();
+        public CRUD_Operations CRUD = new CRUD_Operations();
 
-        List<ServiceRequest> Requests = new List<ServiceRequest>();
+        public List<ServiceRequest> Requests { get; set;}
 
         public ServiceRequestService()
         {
