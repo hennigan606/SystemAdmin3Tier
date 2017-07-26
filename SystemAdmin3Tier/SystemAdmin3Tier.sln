@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseTesting", "Database
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemAdmin_CRUD_Ops", "SystemAdmin_CRUD_Ops\SystemAdmin_CRUD_Ops.csproj", "{592F8D04-BEDC-401E-9025-5009E85B9227}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{FE5C810B-094B-45B0-9506-C5215CA7A643}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{592F8D04-BEDC-401E-9025-5009E85B9227}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{592F8D04-BEDC-401E-9025-5009E85B9227}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{592F8D04-BEDC-401E-9025-5009E85B9227}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE5C810B-094B-45B0-9506-C5215CA7A643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE5C810B-094B-45B0-9506-C5215CA7A643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE5C810B-094B-45B0-9506-C5215CA7A643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE5C810B-094B-45B0-9506-C5215CA7A643}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,6 +13,13 @@ namespace SystemAdmin_CRUD_Ops
         {
         }
 
+        SystemAdminContext context;
+
+        public CRUD_Operations(SystemAdminContext context)
+        {
+            this.context = context;
+        }
+
 
 
         public void InsertUser(string FirstName, string LastName,
@@ -149,8 +156,6 @@ namespace SystemAdmin_CRUD_Ops
                     n.UserAccessGroupID == GroupID).FirstOrDefault();
 
                 accessGroup.Users.Add(user);
-
-                context.AccessGroups.Add(accessGroup);
                 context.SaveChanges();
             }
         }

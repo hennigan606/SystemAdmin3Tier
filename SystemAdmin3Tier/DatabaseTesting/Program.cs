@@ -99,6 +99,18 @@ namespace DatabaseTesting
             //    Console.WriteLine("Logon Attempt Successful? " + attempt.LogonSuccessful);
             //}
 
+
+
+            //Add some sample data to the database
+            //test.InsertUser("Joe", "Bloggs", "joe.bloggs@fdm.com", "abcd1234");
+            //test.InsertUser("Jane", "Bloggs", "jane.bloggs@fdm.com", "1234abcd");
+            //test.InsertUser("Jessica", "Bloggs", "jess.bloggs@fdm.com", "efgh5678");
+            //test.InsertUserAccessGroup("Admins");
+            //test.InsertServiceRequest("Joe Bloggs", "Password Reset", "Forgot Password");
+            //test.InsertServiceRequest("Jessica Bloggs", "Password Reset", "Forgot Password");
+            //test.InsertServiceRequest("Jane Bloggs", "Password Reset", "Forgot Password");
+            //test.AddUserToGroup(2, 5);
+
             Console.ReadLine();
         }
     }
