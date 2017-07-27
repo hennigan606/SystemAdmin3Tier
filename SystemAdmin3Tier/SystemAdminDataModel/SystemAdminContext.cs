@@ -5,9 +5,9 @@ namespace SystemAdminDataModel
 {
     public class SystemAdminContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
-        public DbSet<UserAccessGroup> AccessGroups { get; set; }
-        public DbSet<ServiceRequest> ServiceRequests { get; set; }
-        public DbSet<LogonAttempt> LogonAttempts { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserAccessGroup> AccessGroups { get; set; }
+        public virtual DbSet<ServiceRequest> ServiceRequests { get; set; }
+        public virtual DbSet<LogonAttempt> LogonAttempts { get; set; }
     }
 }
