@@ -34,5 +34,43 @@ namespace UnitTests
             mockDbSet.Verify(x => x.Add(It.IsAny<User>()), Times.Once);
             mockContext.Verify(x => x.SaveChanges(), Times.Once);
         }
+
+
+
+        [Test]
+        public void Test_GetAllUsers_ReturnsAllUsers()
+        {
+            //Arrange
+            var testData = new List<User>
+            {
+                new User
+                {
+                    UserID = 1,
+                    FirstName = "Joe",
+                    LastName = "Bloggs",
+                    Email = "joe.bloggs@fdm.com",
+                    Password = "abcd1234",
+                    IsBanned = false
+                },
+
+                new User
+                {
+                    UserID = 1,
+                    FirstName = "Jane",
+                    LastName = "Bloggs",
+                    Email = "jane.bloggs@fdm.com",
+                    Password = "1234abcd",
+                    IsBanned = false
+                }
+            }.AsQueryable();
+
+            var mockDbSet = new Mock<IDbSet<User>>();
+            mockDbSet.Setup(m => m.Provider).Returns(data.Provider);
+            mockDbSet.Setup(m => m.Expression).Returns(data.Expression);
+            mockDbSet.Setup(m => m.ElementType).Returns(data.ElementType);
+            mockDbSet.Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+
+            
+        }
     }
 }
