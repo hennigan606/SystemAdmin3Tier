@@ -9,7 +9,7 @@ namespace SystemAdmin_CRUD_Ops
     public class CRUD_Operations
     {
 
-        SystemAdminContext context;
+        private SystemAdminContext context;
 
         public CRUD_Operations(SystemAdminContext context)
         {
