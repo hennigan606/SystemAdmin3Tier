@@ -10,7 +10,8 @@ namespace SystemAdmin_CRUD_Ops
     //marking a request as complete
     public class ServiceRequestService
     {
-        public CRUD_Operations CRUD = new CRUD_Operations();
+        private SystemAdminContext context = new SystemAdminContext();
+        public CRUD_Operations CRUD = new CRUD_Operations(context);
         public List<ServiceRequest> Requests { get; set;}
 
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(
