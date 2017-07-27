@@ -10,7 +10,7 @@ namespace SystemAdmin_CRUD_Ops
     //marking a request as complete
     public class ServiceRequestService
     {
-        private SystemAdminContext context = new SystemAdminContext();
+        private SystemAdminContext context;
         public CRUD_Operations CRUD = new CRUD_Operations(context);
         public List<ServiceRequest> Requests { get; set;}
 
