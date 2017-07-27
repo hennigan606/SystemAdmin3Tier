@@ -41,6 +41,29 @@ namespace UnitTests
         public void Test_GetAllUsers_ReturnsAllUsers()
         {
             //Arrange
+            var expected = new List<User>
+            {
+                new User
+                {
+                    UserID = 1,
+                    FirstName = "Joe",
+                    LastName = "Bloggs",
+                    Email = "joe.bloggs@fdm.com",
+                    Password = "abcd1234",
+                    IsBanned = false
+                },
+
+                new User
+                {
+                    UserID = 1,
+                    FirstName = "Jane",
+                    LastName = "Bloggs",
+                    Email = "jane.bloggs@fdm.com",
+                    Password = "1234abcd",
+                    IsBanned = false
+                }
+            };
+
             var testData = new List<User>
             {
                 new User
@@ -65,12 +88,25 @@ namespace UnitTests
             }.AsQueryable();
 
             var mockDbSet = new Mock<IDbSet<User>>();
-            mockDbSet.Setup(m => m.Provider).Returns(data.Provider);
-            mockDbSet.Setup(m => m.Expression).Returns(data.Expression);
-            mockDbSet.Setup(m => m.ElementType).Returns(data.ElementType);
-            mockDbSet.Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mockDbSet.Setup(m => m.Provider).Returns(testData.Provider);
+            mockDbSet.Setup(m => m.Expression).Returns(testData.Expression);
+            mockDbSet.Setup(m => m.ElementType).Returns(testData.ElementType);
+            mockDbSet.Setup(m => m.GetEnumerator()).Returns(testData.GetEnumerator());
 
-            
+            var mockContext = new Mock<SystemAdminContext>();
+            mockContext.Setup(x => x.Users).Returns(mockDbSet.Object);
+
+            var classUnderTest = new CRUD_Operations(mockContext.Object);
+
+            //Act
+            var actual = classUnderTest.GetAllUsers();
+
+            //Assert
+            CollectionAssert.AreEqual(expected, actual);
         }
+
+
+
+        
     }
 }
