@@ -6,7 +6,8 @@ namespace SystemAdmin_CRUD_Ops
 {
     public class LogonService
     {
-        public CRUD_Operations CRUD = new CRUD_Operations();
+        private SystemAdminContext context;
+        public CRUD_Operations CRUD = new CRUD_Operations(context);
         public List<UserAccessGroup> Groups { get; set; }
         public List<User> Users { get; set; }
 
