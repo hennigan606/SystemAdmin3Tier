@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SystemAdminClasses;
+using SystemAdminDataModel;
 
 namespace SystemAdmin_CRUD_Ops
 {
@@ -11,7 +12,7 @@ namespace SystemAdmin_CRUD_Ops
     public class ServiceRequestService
     {
         private SystemAdminContext context;
-        public CRUD_Operations CRUD = new CRUD_Operations(context);
+        public CRUD_Operations CRUD;
         public List<ServiceRequest> Requests { get; set;}
 
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(
@@ -19,6 +20,7 @@ namespace SystemAdmin_CRUD_Ops
 
         public ServiceRequestService()
         {
+            CRUD = new CRUD_Operations(context);
             Requests = CRUD.GetAllServiceRequests();
         }
 

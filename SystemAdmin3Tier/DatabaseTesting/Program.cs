@@ -1,5 +1,6 @@
 ﻿using System;
 using SystemAdmin_CRUD_Ops;
+using SystemAdminDataModel;
 
 namespace DatabaseTesting
 {
@@ -7,7 +8,8 @@ namespace DatabaseTesting
     {
         static void Main(string[] args)
         {
-            CRUD_Operations test = new CRUD_Operations();
+            SystemAdminContext context = new SystemAdminContext();
+            CRUD_Operations test = new CRUD_Operations(context);
             //test.InsertUser("Joe", "Bloggs", "joe.bloggs@fdm.com", "abcd1234");
             //test.InsertUserAccessGroup("Admins");
             //test.InsertServiceRequest("Joe Bloggs", "Password Reset", "Forgot Password");

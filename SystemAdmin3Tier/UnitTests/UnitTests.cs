@@ -1,10 +1,11 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 using SystemAdmin_CRUD_Ops;
 using Moq;
 using System.Data.Entity;
 using SystemAdminClasses;
 using SystemAdminDataModel;
+using System.Linq;
 
 namespace UnitTests
 {
@@ -55,7 +56,7 @@ namespace UnitTests
 
                 new User
                 {
-                    UserID = 1,
+                    UserID = 2,
                     FirstName = "Jane",
                     LastName = "Bloggs",
                     Email = "jane.bloggs@fdm.com",
@@ -78,7 +79,7 @@ namespace UnitTests
 
                 new User
                 {
-                    UserID = 1,
+                    UserID = 2,
                     FirstName = "Jane",
                     LastName = "Bloggs",
                     Email = "jane.bloggs@fdm.com",
@@ -87,11 +88,11 @@ namespace UnitTests
                 }
             }.AsQueryable();
 
-            var mockDbSet = new Mock<IDbSet<User>>();
-            mockDbSet.Setup(m => m.Provider).Returns(testData.Provider);
-            mockDbSet.Setup(m => m.Expression).Returns(testData.Expression);
-            mockDbSet.Setup(m => m.ElementType).Returns(testData.ElementType);
-            mockDbSet.Setup(m => m.GetEnumerator()).Returns(testData.GetEnumerator());
+            var mockDbSet = new Mock<DbSet<User>>();
+            mockDbSet.As<IQueryable<User>>().Setup(m => m.Provider).Returns(testData.Provider);
+            mockDbSet.As<IQueryable<User>>().Setup(m => m.Expression).Returns(testData.Expression);
+            mockDbSet.As<IQueryable<User>>().Setup(m => m.ElementType).Returns(testData.ElementType);
+            mockDbSet.As<IQueryable<User>>().Setup(m => m.GetEnumerator()).Returns(testData.GetEnumerator());
 
             var mockContext = new Mock<SystemAdminContext>();
             mockContext.Setup(x => x.Users).Returns(mockDbSet.Object);
@@ -102,7 +103,18 @@ namespace UnitTests
             var actual = classUnderTest.GetAllUsers();
 
             //Assert
-            CollectionAssert.AreEqual(expected, actual);
+            //CollectionAssert.AreEqual(expected, actual);
+
+            Assert.AreEqual(2, actual.Count);
+            Assert.AreEqual("Joe", actual[0].FirstName);
+            Assert.AreEqual("Jane", actual[1].FirstName);
+
+            Assert.AreEqual(expected[0].UserID, actual[0].UserID);
+            Assert.AreEqual(expected[0].FirstName, actual[0].FirstName);
+            Assert.AreEqual(expected[0].LastName, actual[0].LastName);
+            Assert.AreEqual(expected[0].Email, actual[0].Email);
+            Assert.AreEqual(expected[0].Password, actual[0].Password);
+            Assert.AreEqual(expected[0].IsBanned, actual[0].IsBanned);
         }
 
 
@@ -112,9 +124,11 @@ namespace UnitTests
         {
             //Arrange
             var mockDbSet = new Mock<DbSet<UserAccessGroup>>();
+            var mockDbSet2 = new Mock<DbSet<User>>();
             var mockContext = new Mock<SystemAdminContext>();
 
             mockContext.Setup(x => x.AccessGroups).Returns(mockDbSet.Object);
+            mockContext.Setup(x => x.Users).Returns(mockDbSet2.Object);
 
             var classUnderTest = new CRUD_Operations(mockContext.Object);
 
@@ -122,7 +136,8 @@ namespace UnitTests
             classUnderTest.RemoveUserFromGroup(1, 1);
 
             //Assert
-            mockDbSet.Verify(x => x.Users.Remove(It.IsAny<User>()), Times.Once);
+            mockDbSet.Verify(x => x.Find(1), Times.Once);
+            mockDbSet2.Verify(x => x.Find(1), Times.Once);
             mockContext.Verify(x => x.SaveChanges(), Times.Once);
         }
 

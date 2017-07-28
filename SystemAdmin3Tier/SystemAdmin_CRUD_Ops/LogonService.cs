@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using SystemAdminClasses;
+using SystemAdminDataModel;
 
 namespace SystemAdmin_CRUD_Ops
 {
     public class LogonService
     {
         private SystemAdminContext context;
-        public CRUD_Operations CRUD = new CRUD_Operations(context);
+        public CRUD_Operations CRUD;
         public List<UserAccessGroup> Groups { get; set; }
         public List<User> Users { get; set; }
 
@@ -16,6 +17,7 @@ namespace SystemAdmin_CRUD_Ops
 
         public LogonService()
         {
+            CRUD = new CRUD_Operations(context);
             Groups = CRUD.GetAllAccessGroups();
             Users = CRUD.GetAllUsers();
         }
