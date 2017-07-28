@@ -107,6 +107,31 @@ namespace UnitTests
 
 
 
-        
+        [Test]
+        public void RemoveUserFromGroup_Calls_RemoveOnDbSet_And_SaveChangesOnContext_WhenCalled()
+        {
+            //Arrange
+            var mockDbSet = new Mock<DbSet<UserAccessGroup>>();
+            var mockContext = new Mock<SystemAdminContext>();
+
+            mockContext.Setup(x => x.AccessGroups).Returns(mockDbSet.Object);
+
+            var classUnderTest = new CRUD_Operations(mockContext.Object);
+
+            //Act
+            classUnderTest.RemoveUserFromGroup(1, 1);
+
+            //Assert
+            mockDbSet.Verify(x => x.Users.Remove(It.IsAny<User>()), Times.Once);
+            mockContext.Verify(x => x.SaveChanges(), Times.Once);
+        }
+
+
+
+        [Test]
+        public void DeleteUser_Calls_RemoveOnDbSet_And_SaveChangesOnContext()
+        {
+            
+        }
     }
 }
