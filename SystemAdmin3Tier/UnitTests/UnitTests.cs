@@ -131,7 +131,24 @@ namespace UnitTests
         [Test]
         public void DeleteUser_Calls_RemoveOnDbSet_And_SaveChangesOnContext()
         {
-            
+            //Arrange
+            var mockDbSet = new Mock<DbSet<User>>();
+            var mockContext = new Mock<SystemAdminContext>();
+
+            mockContext.Setup(x => x.Users).Returns(mockDbSet.Object);
+
+            var classUnderTest = new CRUD_Operations(mockContext.Object);
+
+            //Act
+            classUnderTest.DeleteUser(1);
+
+            //Assert
+            mockDbSet.Verify(x => x.Remove(It.IsAny<User>()), Times.Once);
+            mockContext.Verify(x => x.SaveChanges(), Times.Once);
         }
+
+
+
+        
     }
 }
