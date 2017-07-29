@@ -119,27 +119,27 @@ namespace UnitTests
 
 
 
-        [Test]
-        public void RemoveUserFromGroup_Calls_RemoveOnDbSet_And_SaveChangesOnContext_WhenCalled()
-        {
-            //Arrange
-            var mockDbSet = new Mock<DbSet<UserAccessGroup>>();
-            var mockDbSet2 = new Mock<DbSet<User>>();
-            var mockContext = new Mock<SystemAdminContext>();
+        //[Test]
+        //public void RemoveUserFromGroup_Calls_RemoveOnDbSet_And_SaveChangesOnContext_WhenCalled()
+        //{
+        //    //Arrange
+        //    var mockDbSet = new Mock<DbSet<UserAccessGroup>>();
+        //    var mockDbSet2 = new Mock<DbSet<User>>();
+        //    var mockContext = new Mock<SystemAdminContext>();
 
-            mockContext.Setup(x => x.AccessGroups).Returns(mockDbSet.Object);
-            mockContext.Setup(x => x.Users).Returns(mockDbSet2.Object);
+        //    mockContext.Setup(x => x.AccessGroups).Returns(mockDbSet.Object);
+        //    mockContext.Setup(x => x.Users).Returns(mockDbSet2.Object);
 
-            var classUnderTest = new CRUD_Operations(mockContext.Object);
+        //    var classUnderTest = new CRUD_Operations(mockContext.Object);
 
-            //Act
-            classUnderTest.RemoveUserFromGroup(1, 1);
+        //    //Act
+        //    classUnderTest.RemoveUserFromGroup(1, 1);
 
-            //Assert
-            mockDbSet.Verify(x => x.Find(1), Times.Once);
-            mockDbSet2.Verify(x => x.Find(1), Times.Once);
-            mockContext.Verify(x => x.SaveChanges(), Times.Once);
-        }
+        //    //Assert
+        //    mockDbSet.Verify(x => x.Find(1), Times.Once);
+        //    mockDbSet2.Verify(x => x.Find(1), Times.Once);
+        //    mockContext.Verify(x => x.SaveChanges(), Times.Once);
+        //}
 
 
 
