@@ -215,6 +215,35 @@ namespace UnitTests
 
 
 
-        
+        [Test]
+        public void LiftBanOnUser_Calls_FirstOrDefaultOnDbSet_And_SaveChangesOnContext()
+        {
+            //Arrange
+            int UserID = 1;
+            User user = new User
+            {
+                UserID = 1,
+                FirstName = "Joe",
+                LastName = "Bloggs",
+                Email = "joe.bloggs@fdm.com",
+                Password = "abcd1234",
+                IsBanned = false
+            }
+
+            var mockDbSet = new Mock<DbSet<User>>();
+            var mockContext = new Mock<SystemAdminContext>();
+
+            mockDbSet.Setup(x => x.FirstOrDefault()).Returns(user);
+            mockContext.Setup(x => x.Users).Returns(mockDbSet.Object);
+
+            CRUD_Operations classUnderTest = new CRUD_Operations(mockContext.Object);
+
+            //Act
+            classUnderTest.LiftBanOnUser(UserID);
+
+            //Assert
+            mockDbSet.Verify(x => x.FirstOrDefault(), Times.Once);
+            mockContext.Verify(x => x.SaveChanges(), Times.Once);
+        }
     }
 }
