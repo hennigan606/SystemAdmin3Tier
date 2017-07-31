@@ -119,27 +119,45 @@ namespace UnitTests
 
 
 
-        //[Test]
-        //public void RemoveUserFromGroup_Calls_RemoveOnDbSet_And_SaveChangesOnContext_WhenCalled()
-        //{
-        //    //Arrange
-        //    var mockDbSet = new Mock<DbSet<UserAccessGroup>>();
-        //    var mockDbSet2 = new Mock<DbSet<User>>();
-        //    var mockContext = new Mock<SystemAdminContext>();
+        [Test]
+        public void RemoveUserFromGroup_Calls_RemoveOnDbSet_And_SaveChangesOnContext_WhenCalled()
+        {
+            //Arrange
+            UserAccessGroup testGroup = new UserAccessGroup
+            {
+                UserAccessGroupID = 1,
+                GroupName = "test2"
+            }
 
-        //    mockContext.Setup(x => x.AccessGroups).Returns(mockDbSet.Object);
-        //    mockContext.Setup(x => x.Users).Returns(mockDbSet2.Object);
+            User user = new User
+            {
+                UserID = 1,
+                FirstName = "Joe",
+                LastName = "Bloggs",
+                Email = "joe.bloggs@fdm.com",
+                Password = "abcd1234",
+                IsBanned = false
+            }
 
-        //    var classUnderTest = new CRUD_Operations(mockContext.Object);
+            var mockDbSet = new Mock<DbSet<UserAccessGroup>>();
+            var mockDbSet2 = new Mock<DbSet<User>>();
+            var mockContext = new Mock<SystemAdminContext>();
 
-        //    //Act
-        //    classUnderTest.RemoveUserFromGroup(1, 1);
+            mockDbSet.Setup(x => x.Find()).Returns(testGroup);
+            mockDbSet2.Setup(x => x.Find()).Returns(user);
+            mockContext.Setup(x => x.AccessGroups).Returns(mockDbSet.Object);
+            mockContext.Setup(x => x.Users).Returns(mockDbSet2.Object);
 
-        //    //Assert
-        //    mockDbSet.Verify(x => x.Find(1), Times.Once);
-        //    mockDbSet2.Verify(x => x.Find(1), Times.Once);
-        //    mockContext.Verify(x => x.SaveChanges(), Times.Once);
-        //}
+            var classUnderTest = new CRUD_Operations(mockContext.Object);
+
+            //Act
+            classUnderTest.RemoveUserFromGroup(1, 1);
+
+            //Assert
+            mockDbSet.Verify(x => x.Find(1), Times.Once);
+            mockDbSet2.Verify(x => x.Find(1), Times.Once);
+            mockContext.Verify(x => x.SaveChanges(), Times.Once);
+        }
 
 
 
@@ -170,14 +188,14 @@ namespace UnitTests
             //Arrange
             int UserID = 1;
             User user = new User
-                {
-                    UserID = 1,
-                    FirstName = "Joe",
-                    LastName = "Bloggs",
-                    Email = "joe.bloggs@fdm.com",
-                    Password = "abcd1234",
-                    IsBanned = false
-                }
+            {
+                UserID = 1,
+                FirstName = "Joe",
+                LastName = "Bloggs",
+                Email = "joe.bloggs@fdm.com",
+                Password = "abcd1234",
+                IsBanned = false
+            }
 
             var mockDbSet = new Mock<DbSet<User>>();
             var mockContext = new Mock<SystemAdminContext>();
