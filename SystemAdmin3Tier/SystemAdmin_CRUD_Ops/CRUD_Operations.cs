@@ -251,8 +251,7 @@ namespace SystemAdmin_CRUD_Ops
         {
             context.Database.Log = Console.WriteLine;
 
-            LogonAttempt attempt = context.LogonAttempts.Where(
-                n => n.LogonAttemptID == LogonAttemptID).FirstOrDefault();
+            LogonAttempt attempt = context.LogonAttempts.Find(LogonAttemptID);
 
             context.LogonAttempts.Remove(attempt);
             context.SaveChanges();

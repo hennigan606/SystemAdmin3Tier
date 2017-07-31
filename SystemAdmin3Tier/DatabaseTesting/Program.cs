@@ -112,6 +112,8 @@ namespace DatabaseTesting
             //test.InsertServiceRequest("Jessica Bloggs", "Password Reset", "Forgot Password");
             //test.InsertServiceRequest("Jane Bloggs", "Password Reset", "Forgot Password");
             //test.AddUserToGroup(2, 5);
+            //test.RecordSuccessfulLogon();
+            //test.RecordFailedLogon();
 
             Console.ReadLine();
         }
