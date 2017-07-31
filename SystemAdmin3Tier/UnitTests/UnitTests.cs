@@ -120,7 +120,7 @@ namespace UnitTests
 
 
         [Test]
-        public void RemoveUserFromGroup_Calls_RemoveOnDbSet_And_SaveChangesOnContext_WhenCalled()
+        public void RemoveUserFromGroup_Calls_FindBothOnDbSets_And_SaveChangesOnContext_WhenCalled()
         {
             //Arrange
             UserAccessGroup testGroup = new UserAccessGroup
@@ -245,5 +245,9 @@ namespace UnitTests
             mockDbSet.Verify(x => x.FirstOrDefault(), Times.Once);
             mockContext.Verify(x => x.SaveChanges(), Times.Once);
         }
+
+
+
+        
     }
 }
