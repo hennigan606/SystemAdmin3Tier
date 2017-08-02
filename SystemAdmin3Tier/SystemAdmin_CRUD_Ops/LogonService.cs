@@ -17,6 +17,7 @@ namespace SystemAdmin_CRUD_Ops
 
         public LogonService()
         {
+            context = new SystemAdminContext();
             CRUD = new CRUD_Operations(context);
             Groups = CRUD.GetAllAccessGroups();
             Users = CRUD.GetAllUsers();

@@ -16,5 +16,16 @@ namespace SystemAdmin_UI
         {
             InitializeComponent();
         }
+
+        public LogonMenu logonMenu { get; set; }
+
+        private void UserMgmtButton_Click(object sender, EventArgs e)
+        {
+            UserManagement userMgmt = new UserManagement();
+            userMgmt.logonMenu = logonMenu;
+            userMgmt.Main = this;
+            userMgmt.Show();
+            this.Hide();
+        }
     }
 }

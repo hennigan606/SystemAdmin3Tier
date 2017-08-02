@@ -20,6 +20,7 @@ namespace SystemAdmin_CRUD_Ops
 
         public ServiceRequestService()
         {
+            context = new SystemAdminContext();
             CRUD = new CRUD_Operations(context);
             Requests = CRUD.GetAllServiceRequests();
         }

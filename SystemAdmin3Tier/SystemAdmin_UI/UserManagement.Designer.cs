@@ -121,6 +121,7 @@
             this.Name = "UserManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UserManagement";
+            this.Load += new System.EventHandler(this.UserManagement_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

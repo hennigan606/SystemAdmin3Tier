@@ -74,6 +74,7 @@
             this.UserMgmtButton.TabIndex = 6;
             this.UserMgmtButton.Text = "User Management";
             this.UserMgmtButton.UseVisualStyleBackColor = true;
+            this.UserMgmtButton.Click += new System.EventHandler(this.UserMgmtButton_Click);
             // 
             // btnLogonStats
             // 

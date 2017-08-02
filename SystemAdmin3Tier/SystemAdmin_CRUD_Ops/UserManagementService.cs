@@ -20,6 +20,7 @@ namespace SystemAdmin_CRUD_Ops
 
         public UserManagementService()
         {
+            context = new SystemAdminContext();
             CRUD = new CRUD_Operations(context);
             Users = CRUD.GetAllUsers();
         }
