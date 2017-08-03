@@ -12,9 +12,17 @@ namespace SystemAdmin_UI
 {
     public partial class UserLog : Form
     {
+        public LogonMenu logonMenu { get; set; }
+        public MainMenu Main { get; set; }
+
         public UserLog()
         {
             InitializeComponent();
+        }
+
+        private void UserLog_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

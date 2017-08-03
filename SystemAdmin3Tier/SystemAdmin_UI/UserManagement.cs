@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using SystemAdmin_CRUD_Ops;
 
 namespace SystemAdmin_UI
 {
@@ -15,9 +16,12 @@ namespace SystemAdmin_UI
     {
         public LogonMenu logonMenu { get; set; }
         public MainMenu Main { get; set; }
+        private UserManagementService userMgmt;
 
         public UserManagement()
         {
+            userMgmt = new UserManagementService();
+
             InitializeComponent();
         }
 

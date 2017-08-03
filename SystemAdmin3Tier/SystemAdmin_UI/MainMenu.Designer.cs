@@ -44,6 +44,7 @@
             this.LogoutButton.TabIndex = 9;
             this.LogoutButton.Text = "Logout";
             this.LogoutButton.UseVisualStyleBackColor = true;
+            this.LogoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
             // UserLogsButton
             // 
@@ -54,6 +55,7 @@
             this.UserLogsButton.TabIndex = 8;
             this.UserLogsButton.Text = "View User Logs";
             this.UserLogsButton.UseVisualStyleBackColor = true;
+            this.UserLogsButton.Click += new System.EventHandler(this.UserLogsButton_Click);
             // 
             // ServiceRequestsButton
             // 
@@ -64,6 +66,7 @@
             this.ServiceRequestsButton.TabIndex = 7;
             this.ServiceRequestsButton.Text = "User Service Requests";
             this.ServiceRequestsButton.UseVisualStyleBackColor = true;
+            this.ServiceRequestsButton.Click += new System.EventHandler(this.ServiceRequestsButton_Click);
             // 
             // UserMgmtButton
             // 

@@ -114,6 +114,8 @@ namespace DatabaseTesting
             //test.AddUserToGroup(2, 5);
             //test.RecordSuccessfulLogon();
             //test.RecordFailedLogon();
+            //test.AssignAdminToRequest(3, "Joe Admin");
+            //test.MarkAsComplete(4);
 
             Console.ReadLine();
         }

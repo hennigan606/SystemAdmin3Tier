@@ -33,6 +33,10 @@ namespace SystemAdmin_UI
                 Main.Show();
                 this.Hide();
             }
+            else
+            {
+                MessageBox.Show("Login Failed. You have not entered valid login credentials.");
+            }
         }
     }
 }

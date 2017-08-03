@@ -72,6 +72,7 @@
             this.Name = "UserLog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UserLog";
+            this.Load += new System.EventHandler(this.UserLog_Load);
             this.ResumeLayout(false);
 
         }
