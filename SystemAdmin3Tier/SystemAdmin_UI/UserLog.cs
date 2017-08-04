@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,11 @@ namespace SystemAdmin_UI
 
         private void UserLog_Load(object sender, EventArgs e)
         {
+            TextReader reader = new StreamReader(@"C:\Users\Michael\Source\"
+                + @"Repos\SystemAdmin3Tier\SystemAdmin3Tier\SystemAdmin_UI\mylogfile.txt");
 
+            UserLogBox.Text = reader.ReadToEnd();
+            reader.Close();
         }
     }
 }

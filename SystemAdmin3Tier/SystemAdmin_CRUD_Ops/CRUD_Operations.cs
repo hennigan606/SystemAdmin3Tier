@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
+
 namespace SystemAdmin_CRUD_Ops
 {
     public class CRUD_Operations

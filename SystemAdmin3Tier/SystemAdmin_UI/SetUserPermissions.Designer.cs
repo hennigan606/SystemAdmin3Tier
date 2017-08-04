@@ -52,6 +52,7 @@
             this.Cancelbutton.TabIndex = 16;
             this.Cancelbutton.Text = "Cancel";
             this.Cancelbutton.UseVisualStyleBackColor = true;
+            this.Cancelbutton.Click += new System.EventHandler(this.Cancelbutton_Click);
             // 
             // RemoveUserFromGroupbutton
             // 
@@ -62,6 +63,7 @@
             this.RemoveUserFromGroupbutton.TabIndex = 15;
             this.RemoveUserFromGroupbutton.Text = "Remove User";
             this.RemoveUserFromGroupbutton.UseVisualStyleBackColor = true;
+            this.RemoveUserFromGroupbutton.Click += new System.EventHandler(this.RemoveUserFromGroupbutton_Click);
             // 
             // AddUserToGroupbutton
             // 
@@ -72,6 +74,7 @@
             this.AddUserToGroupbutton.TabIndex = 14;
             this.AddUserToGroupbutton.Text = "Add User";
             this.AddUserToGroupbutton.UseVisualStyleBackColor = true;
+            this.AddUserToGroupbutton.Click += new System.EventHandler(this.AddUserToGroupbutton_Click);
             // 
             // SetUserPermissions
             // 
@@ -85,6 +88,7 @@
             this.Name = "SetUserPermissions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SetUserPermissions";
+            this.Load += new System.EventHandler(this.SetUserPermissions_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

@@ -49,6 +49,7 @@
             this.Cancelbutton.TabIndex = 19;
             this.Cancelbutton.Text = "Cancel";
             this.Cancelbutton.UseVisualStyleBackColor = true;
+            this.Cancelbutton.Click += new System.EventHandler(this.Cancelbutton_Click);
             // 
             // AddUserbutton
             // 
@@ -59,6 +60,7 @@
             this.AddUserbutton.TabIndex = 18;
             this.AddUserbutton.Text = "Add User";
             this.AddUserbutton.UseVisualStyleBackColor = true;
+            this.AddUserbutton.Click += new System.EventHandler(this.AddUserbutton_Click);
             // 
             // LastName
             // 

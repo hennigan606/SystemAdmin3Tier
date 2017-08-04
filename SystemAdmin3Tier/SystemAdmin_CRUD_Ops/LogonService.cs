@@ -40,6 +40,7 @@ namespace SystemAdmin_CRUD_Ops
             }
 
 
+            string Username = "";
             int countEmailMatches = 0;
             String checkPassword = "";
             int checkPermissionUserID = 0;
@@ -51,12 +52,14 @@ namespace SystemAdmin_CRUD_Ops
             {
                 if (user.Email == Email)
                 {
+                    Username = user.FirstName + " " + user.LastName;
                     countEmailMatches++;
                     checkPassword = user.Password;
                     checkPermissionUserID = user.UserID;
                     checkIfBanned = user.IsBanned;
                 }
             }
+
 
 
             //Return false if the email provided does not belong to a user on the system
@@ -76,7 +79,8 @@ namespace SystemAdmin_CRUD_Ops
                 //Record the failed logon attempt in the database
                 CRUD.RecordFailedLogon();
                 //Log the failed logon attempt
-                logger.Info("User logon failed. The password entered was incorrect.");
+                logger.Info("User logon failed. User " + Username
+                    + " entered password incorrectly.");
                 return false;
             }
 
@@ -86,8 +90,8 @@ namespace SystemAdmin_CRUD_Ops
                 //Record the failed logon attempt in the database
                 CRUD.RecordFailedLogon();
                 //Log the failed logon attempt
-                logger.Info("User logon failed. The user has been temporarily " +
-                    "banned from the system.");
+                logger.Info("User logon failed. User " + Username + 
+                    " has been temporarily banned from the system.");
                 return false;
             }
 
@@ -115,15 +119,15 @@ namespace SystemAdmin_CRUD_Ops
                 //Record the failed logon attempt in the database
                 CRUD.RecordFailedLogon();
                 //Log the failed logon attempt
-                logger.Info("User logon failed. The user does not have permission " +
-                    "to access this system.");
+                logger.Info("User logon failed. " + Username
+                    + " does not have permission to access the system.");
                 return false;
             }
 
             //Record the successful logon attempt in the database
             CRUD.RecordSuccessfulLogon();
             //Log the successful logon attempt
-            logger.Info("User Logon succeeded.");
+            logger.Info(Username + " successfully logged on to the system.");
             return true;
         }
     }
