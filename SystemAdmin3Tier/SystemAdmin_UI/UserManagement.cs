@@ -63,6 +63,7 @@ namespace SystemAdmin_UI
                 {
                     userMgmt.DeleteUser(UserID);
                     LoadUsers();
+                    logonMenu.Reload();
                 }
 
                 else if (dialogResult == DialogResult.No)
@@ -88,6 +89,7 @@ namespace SystemAdmin_UI
                 {
                     userMgmt.BanUser(UserID);
                     LoadUsers();
+                    logonMenu.Reload();
                 }
 
                 else if (dialogResult == DialogResult.No)
@@ -113,6 +115,7 @@ namespace SystemAdmin_UI
                 {
                     userMgmt.LiftBanOnUser(UserID);
                     LoadUsers();
+                    logonMenu.Reload();
                 }
 
                 else if (dialogResult == DialogResult.No)
@@ -132,6 +135,7 @@ namespace SystemAdmin_UI
                 UserID = Convert.ToInt32(row.Cells["UserID"].Value);
 
                 SetUserPermissions SetPermissions = new SetUserPermissions(UserID);
+                SetPermissions.logonMenu = logonMenu;
                 SetPermissions.Show();
             }
         }

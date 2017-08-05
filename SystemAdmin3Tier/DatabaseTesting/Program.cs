@@ -116,6 +116,7 @@ namespace DatabaseTesting
             //test.RecordFailedLogon();
             //test.AssignAdminToRequest(3, "Joe Admin");
             //test.MarkAsComplete(4);
+            //test.InsertServiceRequest("Joey Bloggface", "Password Reset", "Forgot Password");
 
             Console.ReadLine();
         }

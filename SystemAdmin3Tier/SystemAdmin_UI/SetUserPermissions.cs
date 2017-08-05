@@ -8,6 +8,7 @@ namespace SystemAdmin_UI
 {
     public partial class SetUserPermissions : Form
     {
+        public LogonMenu logonMenu { get; set; }
         private UserManagementService UserMgmt;
         private int UserID;
 
@@ -45,6 +46,7 @@ namespace SystemAdmin_UI
 
                 UserMgmt.AddUserToGroup(UserID, UserAccessGroupID);
                 MessageBox.Show("The selected user was successfully added to the selected access group.");
+                logonMenu.Reload();
                 this.Close();
             }
         }
@@ -60,6 +62,7 @@ namespace SystemAdmin_UI
 
                 UserMgmt.RemoveUserFromGroup(UserID, UserAccessGroupID);
                 MessageBox.Show("The selected user was successfully removed from the selected access group.");
+                logonMenu.Reload();
                 this.Close();
             }
         }
