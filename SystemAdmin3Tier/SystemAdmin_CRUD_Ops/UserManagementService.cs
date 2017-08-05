@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using SystemAdminClasses;
 using SystemAdminDataModel;
 
@@ -122,37 +123,34 @@ namespace SystemAdmin_CRUD_Ops
 
         //Adds the given UserID to the User Access Group with the given ID
         public void AddUserToGroup(int UserID, int UserAccessGroupID)
-        {  
-            List<UserAccessGroup> groups = CRUD.GetAllAccessGroups();
+        {
+            //Find the access group with the given ID
+            UserAccessGroup group = CRUD.GetAllAccessGroups().Where(x
+                => x.UserAccessGroupID == UserAccessGroupID).FirstOrDefault();
 
-            foreach (UserAccessGroup Group in groups)
+            foreach (User user in group.Users)
             {
-                //Find the access group with the given ID
-                if (Group.UserAccessGroupID == UserAccessGroupID)
+                //Check if the user with the given ID is already in the group
+                if (user.UserID == UserID)
                 {
-                    foreach (User user in Group.Users)
-                    {
-                        //Check if the user with the given ID is already in the group
-                        if (user.UserID == UserID)
-                        {
-                            //Log that no action was taken as the user is already in the group
-                            logger.Info("Add user to group operation cancelled as user "
-                                + UserID + " is already a member of group " + UserAccessGroupID);
-                            //If the user is already in the access group, do nothing
-                            return;
-                        }
-                        else
-                        {
-                            //Otherwise, add the user to the access group
-                            //Add the user to the group in the database
-                            CRUD.AddUserToGroup(UserID, UserAccessGroupID);
-                            //Update the list of users in memory to reflect change to database
-                            Users = CRUD.GetAllUsers();
-                            //Log the addition of the user to the access group
-                            logger.Info("User with ID " + UserID + " has been added to the " +
-                                "user access group with ID " + UserAccessGroupID);
-                        }
-                    }
+                    //Log that no action was taken as the user is already in the group
+                    logger.Info("Add user to group operation cancelled as user "
+                        + user.FirstName + " " + user.LastName + " is already a member of group "
+                        + group.GroupName);
+                    //If the user is already in the access group, do nothing
+                    return;
+                }
+                else
+                {
+                    //Otherwise, add the user to the access group
+                    //Add the user to the group in the database
+                    CRUD.AddUserToGroup(UserID, UserAccessGroupID);
+                    //Update the list of users in memory to reflect change to database
+                    Users = CRUD.GetAllUsers();
+                    //Log the addition of the user to the access group
+                    logger.Info("User with ID " + UserID + " has been added to the " +
+                        "user access group with ID " + UserAccessGroupID);
+                    return;
                 }
             }
         }

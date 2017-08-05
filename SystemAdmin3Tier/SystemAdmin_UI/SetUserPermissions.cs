@@ -8,8 +8,7 @@ namespace SystemAdmin_UI
 {
     public partial class SetUserPermissions : Form
     {
-        UserManagementService UserMgmt;
-
+        private UserManagementService UserMgmt;
         private int UserID;
 
         public SetUserPermissions(int UserID)

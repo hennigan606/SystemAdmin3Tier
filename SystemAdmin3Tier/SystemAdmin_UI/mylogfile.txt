@@ -8,3 +8,22 @@
 04/08/2017 21:38 [1] INFO UserManagementService.cs - User with ID 6 has been deleted from the system.
 04/08/2017 22:15 [1] INFO LogonService.cs - Joe Bloggs successfully logged on to the system.
 04/08/2017 22:15 [1] INFO UserManagementService.cs - User with ID 5 has been added to the user access group with ID 5
+05/08/2017 11:45 [1] INFO LogonService.cs - Joe Bloggs successfully logged on to the system.
+05/08/2017 11:45 [1] INFO UserManagementService.cs - User with ID 5 has been added to the user access group with ID 5
+05/08/2017 11:45 [1] INFO UserManagementService.cs - Add user to group operation cancelled as user 5 is already a member of group 5
+05/08/2017 11:46 [1] INFO UserManagementService.cs - User with ID 5 has been removed from user access group with ID 5
+05/08/2017 11:52 [1] INFO LogonService.cs - Joe Bloggs successfully logged on to the system.
+05/08/2017 11:53 [1] INFO UserManagementService.cs - User with ID 5 has been added to the user access group with ID 5
+05/08/2017 11:54 [1] INFO LogonService.cs - Joe Bloggs successfully logged on to the system.
+05/08/2017 11:54 [1] INFO UserManagementService.cs - User with ID 5 has been added to the user access group with ID 5
+05/08/2017 11:54 [1] INFO UserManagementService.cs - Add user to group operation cancelled as user 5 is already a member of group 5
+05/08/2017 11:55 [1] INFO LogonService.cs - User logon failed. The email provided does not belong to a user in the system.
+05/08/2017 11:56 [1] INFO LogonService.cs - User logon failed. The email provided does not belong to a user in the system.
+05/08/2017 11:56 [1] INFO LogonService.cs - Joe Bloggs successfully logged on to the system.
+05/08/2017 11:56 [1] INFO UserManagementService.cs - User with ID 5 has been removed from user access group with ID 5
+05/08/2017 12:18 [1] INFO LogonService.cs - Joe Bloggs successfully logged on to the system.
+05/08/2017 12:18 [1] INFO UserManagementService.cs - User with ID 5 has been added to the user access group with ID 5
+05/08/2017 12:25 [1] INFO LogonService.cs - Henry Hill successfully logged on to the system.
+05/08/2017 12:25 [1] INFO UserManagementService.cs - User with ID 5 has been removed from user access group with ID 5
+05/08/2017 12:25 [1] INFO UserManagementService.cs - User with ID 3 has been added to the user access group with ID 5
+05/08/2017 12:26 [1] INFO UserManagementService.cs - User with ID 3 has been removed from user access group with ID 5
