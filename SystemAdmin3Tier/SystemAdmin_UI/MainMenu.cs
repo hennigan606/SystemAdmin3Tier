@@ -51,5 +51,10 @@ namespace SystemAdmin_UI
             logonMenu.Show();
             this.Close();
         }
+
+        private void btnLogonStats_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

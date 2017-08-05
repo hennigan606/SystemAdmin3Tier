@@ -87,6 +87,7 @@
             this.LogoutButton.TabIndex = 16;
             this.LogoutButton.Text = "Logout";
             this.LogoutButton.UseVisualStyleBackColor = true;
+            this.LogoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
             // ReturnMainMenuButton
             // 
@@ -97,6 +98,7 @@
             this.ReturnMainMenuButton.TabIndex = 15;
             this.ReturnMainMenuButton.Text = "Return To Main Menu";
             this.ReturnMainMenuButton.UseVisualStyleBackColor = true;
+            this.ReturnMainMenuButton.Click += new System.EventHandler(this.ReturnMainMenuButton_Click);
             // 
             // AssignAdminButton
             // 
@@ -108,6 +110,7 @@
             this.AssignAdminButton.Text = "Assign Admin Operator to Request";
             this.AssignAdminButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.AssignAdminButton.UseVisualStyleBackColor = true;
+            this.AssignAdminButton.Click += new System.EventHandler(this.AssignAdminButton_Click);
             // 
             // dataGridView1
             // 
@@ -141,6 +144,7 @@
             this.CompleteRequestButton.TabIndex = 21;
             this.CompleteRequestButton.Text = "Mark As Complete";
             this.CompleteRequestButton.UseVisualStyleBackColor = true;
+            this.CompleteRequestButton.Click += new System.EventHandler(this.CompleteRequestButton_Click);
             // 
             // dataGridView2
             // 
@@ -159,6 +163,7 @@
             this.EditAdditionalInfoButton.TabIndex = 20;
             this.EditAdditionalInfoButton.Text = "Edit Additional Info";
             this.EditAdditionalInfoButton.UseVisualStyleBackColor = true;
+            this.EditAdditionalInfoButton.Click += new System.EventHandler(this.EditAdditionalInfoButton_Click);
             // 
             // Tab2Logoutbtn
             // 
@@ -169,6 +174,7 @@
             this.Tab2Logoutbtn.TabIndex = 19;
             this.Tab2Logoutbtn.Text = "Logout";
             this.Tab2Logoutbtn.UseVisualStyleBackColor = true;
+            this.Tab2Logoutbtn.Click += new System.EventHandler(this.Tab2Logoutbtn_Click);
             // 
             // Tab2ReturnToMainbtn
             // 
@@ -179,6 +185,7 @@
             this.Tab2ReturnToMainbtn.TabIndex = 18;
             this.Tab2ReturnToMainbtn.Text = "Return To Main Menu";
             this.Tab2ReturnToMainbtn.UseVisualStyleBackColor = true;
+            this.Tab2ReturnToMainbtn.Click += new System.EventHandler(this.Tab2ReturnToMainbtn_Click);
             // 
             // tabPage3
             // 
@@ -202,6 +209,7 @@
             this.Tab3Logoutbtn.TabIndex = 15;
             this.Tab3Logoutbtn.Text = "Logout";
             this.Tab3Logoutbtn.UseVisualStyleBackColor = true;
+            this.Tab3Logoutbtn.Click += new System.EventHandler(this.Tab3Logoutbtn_Click);
             // 
             // dataGridView3
             // 
@@ -220,6 +228,7 @@
             this.Tab3ReturnToMainbtn.TabIndex = 14;
             this.Tab3ReturnToMainbtn.Text = "Return To Main Menu";
             this.Tab3ReturnToMainbtn.UseVisualStyleBackColor = true;
+            this.Tab3ReturnToMainbtn.Click += new System.EventHandler(this.Tab3ReturnToMainbtn_Click);
             // 
             // ServiceRequests
             // 

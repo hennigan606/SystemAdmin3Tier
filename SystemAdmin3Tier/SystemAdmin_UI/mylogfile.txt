@@ -52,3 +52,8 @@
 05/08/2017 14:12 [1] INFO LogonService.cs - Joe Bloggs successfully logged on to the system.
 05/08/2017 14:20 [1] INFO LogonService.cs - Joe Bloggs successfully logged on to the system.
 05/08/2017 14:25 [1] INFO LogonService.cs - Joe Bloggs successfully logged on to the system.
+05/08/2017 15:55 [1] INFO LogonService.cs - Joe Bloggs successfully logged on to the system.
+05/08/2017 15:56 [1] INFO ServiceRequestService.cs - Joe Admin has been assigned to request number 5
+05/08/2017 16:42 [1] INFO LogonService.cs - Joe Bloggs successfully logged on to the system.
+05/08/2017 16:56 [1] INFO LogonService.cs - Joe Bloggs successfully logged on to the system.
+05/08/2017 16:57 [1] INFO ServiceRequestService.cs - Request number 5 has been completed.

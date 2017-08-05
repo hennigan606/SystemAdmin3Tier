@@ -88,6 +88,7 @@
             this.btnLogonStats.TabIndex = 10;
             this.btnLogonStats.Text = "Logon Statistics";
             this.btnLogonStats.UseVisualStyleBackColor = true;
+            this.btnLogonStats.Click += new System.EventHandler(this.btnLogonStats_Click);
             // 
             // MainMenu
             // 

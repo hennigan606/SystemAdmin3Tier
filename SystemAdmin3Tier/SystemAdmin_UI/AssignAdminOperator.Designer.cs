@@ -43,6 +43,7 @@
             this.Cancelbtn.TabIndex = 7;
             this.Cancelbtn.Text = "Cancel";
             this.Cancelbtn.UseVisualStyleBackColor = true;
+            this.Cancelbtn.Click += new System.EventHandler(this.Cancelbtn_Click);
             // 
             // AssignOperatorbtn
             // 
@@ -53,6 +54,7 @@
             this.AssignOperatorbtn.TabIndex = 6;
             this.AssignOperatorbtn.Text = "Assign Operator";
             this.AssignOperatorbtn.UseVisualStyleBackColor = true;
+            this.AssignOperatorbtn.Click += new System.EventHandler(this.AssignOperatorbtn_Click);
             // 
             // AdminOperatorlabel
             // 

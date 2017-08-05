@@ -28,6 +28,11 @@ namespace SystemAdmin_UI
 
         private void ServiceRequests_Load(object sender, EventArgs e)
         {
+            LoadRequests();
+        }
+
+        public void LoadRequests()
+        {
             string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog="
                 + @"SystemAdminDataModel.SystemAdminContext;Integrated Security=True;Connect "
                 + @"Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;"
@@ -53,6 +58,89 @@ namespace SystemAdmin_UI
             DataView dataView3 = new DataView(dataSet3.Tables["ServiceRequests"]);
             dataGridView3.DataSource = dataView3;
             dataView3.RowFilter = "Status = 2";
+        }
+
+        private void AssignAdminButton_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count != 0)
+            {
+                int ServiceRequestID;
+
+                DataGridViewRow row = this.dataGridView1.SelectedRows[0];
+                ServiceRequestID = Convert.ToInt32(row.Cells["ServiceRequestID"].Value);
+
+                AssignAdminOperator AssignAdmin = new AssignAdminOperator(ServiceRequestID);
+                AssignAdmin.Requests = this;
+                AssignAdmin.Show();
+            }
+        }
+
+        private void ReturnMainMenuButton_Click(object sender, EventArgs e)
+        {
+            Main.Show();
+            this.Close();
+        }
+
+        private void LogoutButton_Click(object sender, EventArgs e)
+        {
+            logonMenu.Show();
+            Main.Close();
+            this.Close();
+        }
+
+        private void EditAdditionalInfoButton_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count != 0)
+            {
+                int ServiceRequestID;
+
+                DataGridViewRow row = this.dataGridView1.SelectedRows[0];
+                ServiceRequestID = Convert.ToInt32(row.Cells["ServiceRequestID"].Value);
+
+                EditAdditionalInfo EditInfo = new EditAdditionalInfo(ServiceRequestID);
+                EditInfo.Requests = this;
+                EditInfo.Show();
+            }
+        }
+
+        private void CompleteRequestButton_Click(object sender, EventArgs e)
+        {
+            if (dataGridView2.SelectedRows.Count != 0)
+            {
+                int ServiceRequestID;
+
+                DataGridViewRow row = this.dataGridView2.SelectedRows[0];
+                ServiceRequestID = Convert.ToInt32(row.Cells["ServiceRequestID"].Value);
+
+                serviceRequests.MarkAsComplete(ServiceRequestID);
+                LoadRequests();
+            }
+        }
+
+        private void Tab2ReturnToMainbtn_Click(object sender, EventArgs e)
+        {
+            Main.Show();
+            this.Close();
+        }
+
+        private void Tab2Logoutbtn_Click(object sender, EventArgs e)
+        {
+            logonMenu.Show();
+            Main.Close();
+            this.Close();
+        }
+
+        private void Tab3ReturnToMainbtn_Click(object sender, EventArgs e)
+        {
+            Main.Show();
+            this.Close();
+        }
+
+        private void Tab3Logoutbtn_Click(object sender, EventArgs e)
+        {
+            logonMenu.Show();
+            Main.Close();
+            this.Close();
         }
     }
 }

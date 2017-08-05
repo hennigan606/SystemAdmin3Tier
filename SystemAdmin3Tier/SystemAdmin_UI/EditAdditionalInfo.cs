@@ -1,20 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using SystemAdmin_CRUD_Ops;
 
 namespace SystemAdmin_UI
 {
     public partial class EditAdditionalInfo : Form
     {
-        public EditAdditionalInfo()
+        public ServiceRequests Requests { get; set; }
+        private int ServiceRequestID;
+        private ServiceRequestService Service = new ServiceRequestService();
+
+        public EditAdditionalInfo(int ServiceRequestID)
         {
+            this.ServiceRequestID = ServiceRequestID;
+
             InitializeComponent();
+        }
+
+        private void Savebtn_Click(object sender, EventArgs e)
+        {
+            Service.ProvideInfo(ServiceRequestID, textBox1.Text);
+            Requests.LoadRequests();
+            MessageBox.Show("Your comment has been added to the selected service request.");
+            this.Close();
+        }
+
+        private void Cancelbtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

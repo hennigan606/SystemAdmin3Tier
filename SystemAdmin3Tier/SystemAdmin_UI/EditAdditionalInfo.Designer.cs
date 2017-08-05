@@ -60,6 +60,7 @@
             this.Cancelbtn.TabIndex = 5;
             this.Cancelbtn.Text = "Cancel";
             this.Cancelbtn.UseVisualStyleBackColor = true;
+            this.Cancelbtn.Click += new System.EventHandler(this.Cancelbtn_Click);
             // 
             // Savebtn
             // 
@@ -70,6 +71,7 @@
             this.Savebtn.TabIndex = 4;
             this.Savebtn.Text = "Save";
             this.Savebtn.UseVisualStyleBackColor = true;
+            this.Savebtn.Click += new System.EventHandler(this.Savebtn_Click);
             // 
             // EditAdditionalInfo
             // 
