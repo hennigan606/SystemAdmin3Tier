@@ -54,7 +54,11 @@ namespace SystemAdmin_UI
 
         private void btnLogonStats_Click(object sender, EventArgs e)
         {
-
+            LogonStats stats = new LogonStats();
+            stats.logonMenu = logonMenu;
+            stats.Main = this;
+            stats.Show();
+            this.Hide();
         }
     }
 }
