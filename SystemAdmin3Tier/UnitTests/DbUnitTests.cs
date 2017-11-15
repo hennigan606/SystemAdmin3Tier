@@ -11,7 +11,7 @@ using System;
 namespace UnitTests
 {
     [TestFixture]
-    public class UnitTests
+    public class DbUnitTests
     {
         [Test]
         public void InsertUser_Calls_AddOnDbSet_And_SaveChangesOnContext_WhenCalled()
