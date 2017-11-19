@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SystemAdmin_CRUD_Ops;
 using System.Data.SqlClient;
+using SystemAdminDataModel;
 
 namespace SystemAdmin_UI
 {
@@ -18,10 +13,14 @@ namespace SystemAdmin_UI
         public MainMenu Main { get; set; }
 
         private ServiceRequestService serviceRequests;
+        private SystemAdminContext context;
+        private CRUD_Operations CRUD;
 
         public ServiceRequests()
         {
-            serviceRequests = new ServiceRequestService();
+            context = new SystemAdminContext();
+            CRUD = new CRUD_Operations(context);
+            serviceRequests = new ServiceRequestService(CRUD);
 
             InitializeComponent();
         }

@@ -8,17 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SystemAdmin_CRUD_Ops;
+using SystemAdminDataModel;
 
 namespace SystemAdmin_UI
 {
     public partial class AddNewUser : Form
     {
         public UserManagement UserMgmt { get; set; }
+
         private UserManagementService userMgmt;
+        private SystemAdminContext context;
+        private CRUD_Operations CRUD;
 
         public AddNewUser()
         {
-            userMgmt = new UserManagementService();
+            context = new SystemAdminContext();
+            CRUD = new CRUD_Operations(context);
+            userMgmt = new UserManagementService(CRUD);
 
             InitializeComponent();
         }

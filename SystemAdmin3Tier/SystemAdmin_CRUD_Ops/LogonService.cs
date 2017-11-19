@@ -1,26 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using SystemAdminClasses;
-using SystemAdminDataModel;
 
 namespace SystemAdmin_CRUD_Ops
 {
     public class LogonService
     {
-        private SystemAdminContext context;
-        public CRUD_Operations CRUD;
-        public List<UserAccessGroup> Groups { get; set; }
-        public List<User> Users { get; set; }
+        private ICRUD_Operations CRUD;
 
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(
             "LogonService.cs");
 
-        public LogonService()
+        public LogonService(ICRUD_Operations iCRUD)
         {
-            context = new SystemAdminContext();
-            CRUD = new CRUD_Operations(context);
-            Groups = CRUD.GetAllAccessGroups();
-            Users = CRUD.GetAllUsers();
+            CRUD = iCRUD;
         }
 
 
@@ -30,7 +22,7 @@ namespace SystemAdmin_CRUD_Ops
         public bool AttemptLogon(String Email, String Password)
         {
             //Return false if there are no users on the system
-            if (Users.Count == 0)
+            if (CRUD.GetAllUsers().Count == 0)
             {
                 //Record the failed logon attempt in the database
                 CRUD.RecordFailedLogon();
@@ -48,7 +40,7 @@ namespace SystemAdmin_CRUD_Ops
             bool checkIfBanned = false;
 
             //Find the user in the system whose email matches the one provided
-            foreach (User user in Users)
+            foreach (User user in CRUD.GetAllUsers())
             {
                 if (user.Email == Email)
                 {
@@ -96,7 +88,7 @@ namespace SystemAdmin_CRUD_Ops
             }
 
             //Return false if the user does not have permission to access the system
-            foreach (UserAccessGroup Group in Groups)
+            foreach (UserAccessGroup Group in CRUD.GetAllAccessGroups())
             {
                 //Find the admins access group
                 if (Group.GroupName == "Admins")

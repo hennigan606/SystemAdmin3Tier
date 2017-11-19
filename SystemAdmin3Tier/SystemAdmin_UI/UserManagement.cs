@@ -3,7 +3,7 @@ using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using SystemAdmin_CRUD_Ops;
-using SystemAdminClasses;
+using SystemAdminDataModel;
 
 namespace SystemAdmin_UI
 {
@@ -11,11 +11,16 @@ namespace SystemAdmin_UI
     {
         public LogonMenu logonMenu { get; set; }
         public MainMenu Main { get; set; }
+
         private UserManagementService userMgmt;
+        private SystemAdminContext context;
+        private CRUD_Operations CRUD;
 
         public UserManagement()
         {
-            userMgmt = new UserManagementService();
+            context = new SystemAdminContext();
+            CRUD = new CRUD_Operations(context);
+            userMgmt = new UserManagementService(CRUD);
 
             InitializeComponent();
         }

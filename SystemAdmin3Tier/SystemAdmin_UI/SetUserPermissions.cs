@@ -3,18 +3,24 @@ using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using SystemAdmin_CRUD_Ops;
+using SystemAdminDataModel;
 
 namespace SystemAdmin_UI
 {
     public partial class SetUserPermissions : Form
     {
         public LogonMenu logonMenu { get; set; }
+
         private UserManagementService UserMgmt;
+        private SystemAdminContext context;
+        private CRUD_Operations CRUD;
         private int UserID;
 
         public SetUserPermissions(int UserID)
         {
-            UserMgmt = new UserManagementService();
+            context = new SystemAdminContext();
+            CRUD = new CRUD_Operations(context);
+            UserMgmt = new UserManagementService(CRUD);
             this.UserID = UserID;
 
             InitializeComponent();

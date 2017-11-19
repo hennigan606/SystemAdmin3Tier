@@ -8,7 +8,33 @@ using System;
 
 namespace SystemAdmin_CRUD_Ops
 {
-    public class CRUD_Operations
+    public interface ICRUD_Operations
+    {
+        void InsertUser(string FirstName, string LastName,
+            string Email, string Password);
+        void InsertUserAccessGroup(string GroupName);
+        void InsertServiceRequest(string UserFullName, string RequestType,
+            string Details);
+        List<User> GetAllUsers();
+        List<UserAccessGroup> GetAllAccessGroups();
+        List<ServiceRequest> GetAllServiceRequests();
+        void BanUser(int UserID);
+        void LiftBanOnUser(int UserID);
+        void AddUserToGroup(int UserID, int GroupID);
+        void RemoveUserFromGroup(int UserID, int GroupID);
+        void AssignAdminToRequest(int RequestID, string AdminName);
+        void ProvideInfo(int RequestID, string AdditionalInfo);
+        void MarkAsComplete(int RequestID);
+        void DeleteUser(int UserID);
+        void DeleteAccessGroup(int AccessGroupID);
+        void DeleteServiceRequest(int RequestID);
+        void RecordSuccessfulLogon();
+        void RecordFailedLogon();
+        void DeleteLogonAttempt(int LogonAttemptID);
+        List<LogonAttempt> GetAllLogonAttempts();
+    }
+
+    public class CRUD_Operations : ICRUD_Operations
     {
 
         private SystemAdminContext context;

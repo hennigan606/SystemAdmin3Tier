@@ -1,17 +1,24 @@
 ﻿using System;
 using System.Windows.Forms;
 using SystemAdmin_CRUD_Ops;
+using SystemAdminDataModel;
 
 namespace SystemAdmin_UI
 {
     public partial class EditAdditionalInfo : Form
     {
         public ServiceRequests Requests { get; set; }
+
         private int ServiceRequestID;
-        private ServiceRequestService Service = new ServiceRequestService();
+        private ServiceRequestService Service;
+        private SystemAdminContext context;
+        private CRUD_Operations CRUD;
 
         public EditAdditionalInfo(int ServiceRequestID)
         {
+            context = new SystemAdminContext();
+            CRUD = new CRUD_Operations(context);
+            Service = new ServiceRequestService(CRUD);
             this.ServiceRequestID = ServiceRequestID;
 
             InitializeComponent();

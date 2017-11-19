@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Windows.Forms;
 using SystemAdmin_CRUD_Ops;
+using SystemAdminDataModel;
 
 namespace SystemAdmin_UI
 {
     public partial class LogonMenu : Form
     {
         private LogonService logon;
+        private SystemAdminContext context;
+        private CRUD_Operations CRUD;
 
         public LogonMenu()
         {
-            logon = new LogonService();
+            context = new SystemAdminContext();
+            CRUD = new CRUD_Operations(context);
+            logon = new LogonService(CRUD);
 
             InitializeComponent();
         }
@@ -33,7 +38,7 @@ namespace SystemAdmin_UI
 
         public void Reload()
         {
-            logon = new LogonService();
+            logon = new LogonService(CRUD);
         }
     }
 }

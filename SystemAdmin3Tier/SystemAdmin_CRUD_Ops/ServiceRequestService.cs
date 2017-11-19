@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using SystemAdminClasses;
-using SystemAdminDataModel;
 
 namespace SystemAdmin_CRUD_Ops
 {
@@ -11,18 +8,14 @@ namespace SystemAdmin_CRUD_Ops
     //marking a request as complete
     public class ServiceRequestService
     {
-        private SystemAdminContext context;
-        public CRUD_Operations CRUD;
-        public List<ServiceRequest> Requests { get; set;}
+        private ICRUD_Operations CRUD;
 
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(
             "ServiceRequestService.cs");
 
-        public ServiceRequestService()
+        public ServiceRequestService(ICRUD_Operations iCRUD)
         {
-            context = new SystemAdminContext();
-            CRUD = new CRUD_Operations(context);
-            Requests = CRUD.GetAllServiceRequests();
+            CRUD = iCRUD;
         }
 
 
@@ -33,9 +26,7 @@ namespace SystemAdmin_CRUD_Ops
         {
             //Add the new request to the database
             CRUD.InsertServiceRequest(UserFullName, RequestType, Details);
-            //Update the list of service requests in memory to include new
-            //request added to the database
-            Requests = CRUD.GetAllServiceRequests();
+
             //Log the creation of a new request
             logger.Info("New service request submitted by user: " + UserFullName);
         }
@@ -47,8 +38,7 @@ namespace SystemAdmin_CRUD_Ops
         {
             //Update the service request in the database
             CRUD.AssignAdminToRequest(RequestID, AdminName);
-            //Update the list of service requests in memory to reflect change to database
-            Requests = CRUD.GetAllServiceRequests();
+
             //Log the assignment of an admin operator to the request
             logger.Info(AdminName + " has been assigned to request number " + RequestID);
         }
@@ -60,8 +50,7 @@ namespace SystemAdmin_CRUD_Ops
         {
             //Update the service request in the database
             CRUD.ProvideInfo(RequestID, Info);
-            //Update the list of service requests in memory to reflect change to database
-            Requests = CRUD.GetAllServiceRequests();
+
             //Log the addition of information to the service request
             logger.Info("The admin operator assigned to request number "
                 + RequestID + " has added addtional information to the request.");
@@ -74,8 +63,7 @@ namespace SystemAdmin_CRUD_Ops
         {
             //Update the service request in the database
             CRUD.MarkAsComplete(RequestID);
-            //Update the list of service requests in memory to reflect change to database
-            Requests = CRUD.GetAllServiceRequests();
+
             //Log the completion of the service request
             logger.Info("Request number " + RequestID + " has been completed.");
         }
