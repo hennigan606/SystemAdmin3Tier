@@ -144,5 +144,27 @@ namespace UnitTests.LogicUnitTests
             //Assert
             MockCRUD.Verify(x => x.GetAllUsers(), Times.Once);
         }
+
+
+        [Test]
+        public void DeleteUser_Calls_RemoveUserFromGroup_ExactlyOnce_WhenCalled_IfUserIsInOneAccessGroup()
+        {
+            //Arrange
+            int TestUserID = 1;
+            User TestUser = new User { UserID = TestUserID };
+            UserAccessGroup TestGroup = new UserAccessGroup { UserAccessGroupID = 1 };
+            TestUser.AccessGroups.Add(TestGroup);
+
+            Mock<ICRUD_Operations> MockCRUD = new Mock<ICRUD_Operations>();
+            MockCRUD.Setup(x => x.GetAllUsers()).Returns(new List<User> { TestUser });
+
+            UserManagementService UserMgmtService = new UserManagementService(MockCRUD.Object);
+
+            //Act
+            UserMgmtService.DeleteUser(TestUserID);
+
+            //Assert
+            MockCRUD.Verify(x => x.RemoveUserFromGroup(It.IsAny<int>(), It.IsAny<int>()), Times.Once);
+        }
     }
 }
