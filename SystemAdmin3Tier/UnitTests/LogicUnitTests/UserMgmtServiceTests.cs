@@ -99,7 +99,7 @@ namespace UnitTests.LogicUnitTests
 
             //Assert
             MockCRUD.Verify(x => x.InsertUser(TestFirstName, TestLastName,
-                TestEmail, TestPassword);
+                TestEmail, TestPassword));
         }
 
 
@@ -151,7 +151,7 @@ namespace UnitTests.LogicUnitTests
         {
             //Arrange
             int TestUserID = 1;
-            User TestUser = new User { UserID = TestUserID };
+            User TestUser = new User { UserID = TestUserID, AccessGroups = new List<UserAccessGroup>() };
             UserAccessGroup TestGroup = new UserAccessGroup { UserAccessGroupID = 1 };
             TestUser.AccessGroups.Add(TestGroup);
 
@@ -165,6 +165,53 @@ namespace UnitTests.LogicUnitTests
 
             //Assert
             MockCRUD.Verify(x => x.RemoveUserFromGroup(It.IsAny<int>(), It.IsAny<int>()), Times.Once);
+        }
+
+
+        [Test]
+        public void DeleteUser_Calls_RemoveUserFromGroup_ExactlyTwice_WhenCalled_IfUserIsInTwoAccessGroups()
+        {
+            //Arrange
+            int TestUserID = 1;
+            User TestUser = new User { UserID = TestUserID, AccessGroups = new List<UserAccessGroup>() };
+
+            UserAccessGroup TestGroup = new UserAccessGroup { UserAccessGroupID = 1 };
+            UserAccessGroup TestGroup2 = new UserAccessGroup { UserAccessGroupID = 2 };
+            TestUser.AccessGroups.Add(TestGroup);
+            TestUser.AccessGroups.Add(TestGroup2);
+
+            Mock<ICRUD_Operations> MockCRUD = new Mock<ICRUD_Operations>();
+            MockCRUD.Setup(x => x.GetAllUsers()).Returns(new List<User> { TestUser });
+
+            UserManagementService UserMgmtService = new UserManagementService(MockCRUD.Object);
+
+            //Act
+            UserMgmtService.DeleteUser(TestUserID);
+
+            //Assert
+            MockCRUD.Verify(x => x.RemoveUserFromGroup(It.IsAny<int>(), It.IsAny<int>()), Times.Exactly(2));
+        }
+
+
+        [Test]
+        public void DeleteUser_Calls_RemoveUserFromGroup_ExactlyOnce_WhenCalled_IfUserIsInOneAccessGroup_PassingInTheCorrectIDs()
+        {
+            //Arrange
+            int TestUserID = 1;
+            User TestUser = new User { UserID = TestUserID, AccessGroups = new List<UserAccessGroup>() };
+            UserAccessGroup TestGroup = new UserAccessGroup { UserAccessGroupID = 1 };
+            TestUser.AccessGroups.Add(TestGroup);
+
+            Mock<ICRUD_Operations> MockCRUD = new Mock<ICRUD_Operations>();
+            MockCRUD.Setup(x => x.GetAllUsers()).Returns(new List<User> { TestUser });
+
+            UserManagementService UserMgmtService = new UserManagementService(MockCRUD.Object);
+
+            //Act
+            UserMgmtService.DeleteUser(TestUserID);
+
+            //Assert
+            MockCRUD.Verify(x => x.RemoveUserFromGroup(TestUser.UserID, TestGroup.UserAccessGroupID), Times.Once);
         }
     }
 }
