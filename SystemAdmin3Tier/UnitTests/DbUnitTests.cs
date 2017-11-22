@@ -14,32 +14,6 @@ namespace UnitTests
     public class DbUnitTests
     {
         [Test]
-        public void InsertUser_Calls_AddOnDbSet_And_SaveChangesOnContext_WhenCalled()
-        {
-            //Arrange
-            string FirstName = "Michael";
-            string LastName = "Hennigan";
-            string Email = "michael.hennigan@fdm.com";
-            string Password = "1234abcd";
-
-            var mockDbSet = new Mock<DbSet<User>>();
-            var mockContext = new Mock<SystemAdminContext>();
-
-            mockContext.Setup(x => x.Users).Returns(mockDbSet.Object);
-
-            var classUnderTest = new CRUD_Operations(mockContext.Object);
-
-            //Act
-            classUnderTest.InsertUser(FirstName, LastName, Email, Password);
-
-            //Assert
-            mockDbSet.Verify(x => x.Add(It.IsAny<User>()), Times.Once);
-            mockContext.Verify(x => x.SaveChanges(), Times.Once);
-        }
-
-
-
-        [Test]
         public void Test_GetAllUsers_ReturnsAllUsers()
         {
             //Arrange
@@ -120,158 +94,6 @@ namespace UnitTests
 
 
 
-        //[Test]
-        //public void RemoveUserFromGroup_Calls_FindBothOnDbSets_And_SaveChangesOnContext_WhenCalled()
-        //{
-        //    //Arrange
-        //    UserAccessGroup testGroup = new UserAccessGroup
-        //    {
-        //        UserAccessGroupID = 1,
-        //        GroupName = "test2"
-        //    };
-
-        //    User user = new User
-        //    {
-        //        UserID = 1,
-        //        FirstName = "Joe",
-        //        LastName = "Bloggs",
-        //        Email = "joe.bloggs@fdm.com",
-        //        Password = "abcd1234",
-        //        IsBanned = false
-        //    };
-
-        //    var mockDbSet = new Mock<DbSet<UserAccessGroup>>();
-        //    var mockDbSet2 = new Mock<DbSet<User>>();
-        //    var mockContext = new Mock<SystemAdminContext>();
-
-        //    mockDbSet.Setup(x => x.Find()).Returns(testGroup);
-        //    mockDbSet2.Setup(x => x.Find()).Returns(user);
-        //    mockContext.Setup(x => x.AccessGroups).Returns(mockDbSet.Object);
-        //    mockContext.Setup(x => x.Users).Returns(mockDbSet2.Object);
-
-        //    var classUnderTest = new CRUD_Operations(mockContext.Object);
-
-        //    //Act
-        //    classUnderTest.RemoveUserFromGroup(1, 1);
-
-        //    //Assert
-        //    mockDbSet.Verify(x => x.Find(1), Times.Once);
-        //    mockDbSet2.Verify(x => x.Find(1), Times.Once);
-        //    mockContext.Verify(x => x.SaveChanges(), Times.Once);
-        //}
-
-
-
-        [Test]
-        public void DeleteUser_Calls_RemoveOnDbSet_And_SaveChangesOnContext()
-        {
-            //Arrange
-            var mockDbSet = new Mock<DbSet<User>>();
-            var mockContext = new Mock<SystemAdminContext>();
-
-            mockContext.Setup(x => x.Users).Returns(mockDbSet.Object);
-
-            var classUnderTest = new CRUD_Operations(mockContext.Object);
-
-            //Act
-            classUnderTest.DeleteUser(1);
-
-            //Assert
-            mockDbSet.Verify(x => x.Remove(It.IsAny<User>()), Times.Once);
-            mockContext.Verify(x => x.SaveChanges(), Times.Once);
-        }
-
-
-
-        //[Test]
-        //public void BanUser_Calls_FirstOrDefaultOnDbSet_And_SaveChangesOnContext()
-        //{
-        //    //Arrange
-        //    int UserID = 1;
-        //    User user = new User
-        //    {
-        //        UserID = 1,
-        //        FirstName = "Joe",
-        //        LastName = "Bloggs",
-        //        Email = "joe.bloggs@fdm.com",
-        //        Password = "abcd1234",
-        //        IsBanned = false
-        //    };
-
-        //    var mockDbSet = new Mock<DbSet<User>>();
-        //    var mockContext = new Mock<SystemAdminContext>();
-
-        //    mockDbSet.Setup(x => x.FirstOrDefault()).Returns(user);
-        //    mockContext.Setup(x => x.Users).Returns(mockDbSet.Object);
-
-        //    CRUD_Operations classUnderTest = new CRUD_Operations(mockContext.Object);
-
-        //    //Act
-        //    classUnderTest.BanUser(UserID);
-
-        //    //Assert
-        //    mockDbSet.Verify(x => x.FirstOrDefault(), Times.Once);
-        //    mockContext.Verify(x => x.SaveChanges(), Times.Once);
-        //}
-
-
-
-        //[Test]
-        //public void LiftBanOnUser_Calls_FirstOrDefaultOnDbSet_And_SaveChangesOnContext()
-        //{
-        //    //Arrange
-        //    int UserID = 1;
-        //    User user = new User
-        //    {
-        //        UserID = 1,
-        //        FirstName = "Joe",
-        //        LastName = "Bloggs",
-        //        Email = "joe.bloggs@fdm.com",
-        //        Password = "abcd1234",
-        //        IsBanned = false
-        //    };
-
-        //    var mockDbSet = new Mock<DbSet<User>>();
-        //    var mockContext = new Mock<SystemAdminContext>();
-
-        //    mockDbSet.Setup(x => x.FirstOrDefault()).Returns(user);
-        //    mockContext.Setup(x => x.Users).Returns(mockDbSet.Object);
-
-        //    CRUD_Operations classUnderTest = new CRUD_Operations(mockContext.Object);
-
-        //    //Act
-        //    classUnderTest.LiftBanOnUser(UserID);
-
-        //    //Assert
-        //    mockDbSet.Verify(x => x.FirstOrDefault(), Times.Once);
-        //    mockContext.Verify(x => x.SaveChanges(), Times.Once);
-        //}
-
-
-
-        [Test]
-        public void InsertUserAccessGroup_Calls_AddOnDbSet_And_SaveChangesOnContext_WhenCalled()
-        {
-            //Arrange
-            string GroupName = "Test";
-
-            var mockDbSet = new Mock<DbSet<UserAccessGroup>>();
-            var mockContext = new Mock<SystemAdminContext>();
-
-            mockContext.Setup(x => x.AccessGroups).Returns(mockDbSet.Object);
-
-            var classUnderTest = new CRUD_Operations(mockContext.Object);
-
-            //Act
-            classUnderTest.InsertUserAccessGroup(GroupName);
-
-            //Assert
-            mockDbSet.Verify(x => x.Add(It.IsAny<UserAccessGroup>()), Times.Once);
-            mockContext.Verify(x => x.SaveChanges(), Times.Once);
-        }
-
-
-
         [Test]
         public void Test_GetAllAccessGroups_ReturnsAllAccessGroups()
         {
@@ -327,52 +149,6 @@ namespace UnitTests
             Assert.AreEqual(expected[1].UserAccessGroupID, actual[1].UserAccessGroupID);
             Assert.AreEqual(expected[0].GroupName, actual[0].GroupName);
             Assert.AreEqual(expected[1].GroupName, actual[1].GroupName);
-        }
-
-
-
-        [Test]
-        public void DeleteAccessGroup_Calls_RemoveOnDbSet_And_SaveChangesOnContext()
-        {
-            //Arrange
-            var mockDbSet = new Mock<DbSet<UserAccessGroup>>();
-            var mockContext = new Mock<SystemAdminContext>();
-
-            mockContext.Setup(x => x.AccessGroups).Returns(mockDbSet.Object);
-
-            var classUnderTest = new CRUD_Operations(mockContext.Object);
-
-            //Act
-            classUnderTest.DeleteAccessGroup(1);
-
-            //Assert
-            mockDbSet.Verify(x => x.Remove(It.IsAny<UserAccessGroup>()), Times.Once);
-            mockContext.Verify(x => x.SaveChanges(), Times.Once);
-        }
-
-
-
-        [Test]
-        public void InsertServiceRequest_Calls_AddOnDbSet_And_SaveChangesOnContext_WhenCalled()
-        {
-            //Arrange
-            string UserFullName = "Joe Bloggs";
-            string RequestType = "Password Reset";
-            string Details = "Forgot Password";
-
-            var mockDbSet = new Mock<DbSet<ServiceRequest>>();
-            var mockContext = new Mock<SystemAdminContext>();
-
-            mockContext.Setup(x => x.ServiceRequests).Returns(mockDbSet.Object);
-
-            var classUnderTest = new CRUD_Operations(mockContext.Object);
-
-            //Act
-            classUnderTest.InsertServiceRequest(UserFullName, RequestType, Details);
-
-            //Assert
-            mockDbSet.Verify(x => x.Add(It.IsAny<ServiceRequest>()), Times.Once);
-            mockContext.Verify(x => x.SaveChanges(), Times.Once);
         }
 
 
@@ -455,90 +231,6 @@ namespace UnitTests
 
 
         [Test]
-        public void DeleteServiceRequest_Calls_RemoveOnDbSet_And_SaveChangesOnContext()
-        {
-            //Arrange
-            var mockDbSet = new Mock<DbSet<ServiceRequest>>();
-            var mockContext = new Mock<SystemAdminContext>();
-
-            mockContext.Setup(x => x.ServiceRequests).Returns(mockDbSet.Object);
-
-            var classUnderTest = new CRUD_Operations(mockContext.Object);
-
-            //Act
-            classUnderTest.DeleteServiceRequest(1);
-
-            //Assert
-            mockDbSet.Verify(x => x.Remove(It.IsAny<ServiceRequest>()), Times.Once);
-            mockContext.Verify(x => x.SaveChanges(), Times.Once);
-        }
-
-
-
-        [Test]
-        public void RecordSuccessfulLogon_Calls_AddOnDbSet_And_SaveChangesOnContext_WhenCalled()
-        {
-            //Arrange
-            var mockDbSet = new Mock<DbSet<LogonAttempt>>();
-            var mockContext = new Mock<SystemAdminContext>();
-
-            mockContext.Setup(x => x.LogonAttempts).Returns(mockDbSet.Object);
-
-            var classUnderTest = new CRUD_Operations(mockContext.Object);
-
-            //Act
-            classUnderTest.RecordSuccessfulLogon();
-
-            //Assert
-            mockDbSet.Verify(x => x.Add(It.IsAny<LogonAttempt>()), Times.Once);
-            mockContext.Verify(x => x.SaveChanges(), Times.Once);
-        }
-
-
-
-        [Test]
-        public void RecordFailedLogon_Calls_AddOnDbSet_And_SaveChangesOnContext_WhenCalled()
-        {
-            //Arrange
-            var mockDbSet = new Mock<DbSet<LogonAttempt>>();
-            var mockContext = new Mock<SystemAdminContext>();
-
-            mockContext.Setup(x => x.LogonAttempts).Returns(mockDbSet.Object);
-
-            var classUnderTest = new CRUD_Operations(mockContext.Object);
-
-            //Act
-            classUnderTest.RecordFailedLogon();
-
-            //Assert
-            mockDbSet.Verify(x => x.Add(It.IsAny<LogonAttempt>()), Times.Once);
-            mockContext.Verify(x => x.SaveChanges(), Times.Once);
-        }
-
-
-
-        [Test]
-        public void DeleteLogonAttempt_Calls_RemoveOnDbSet_And_SaveChangesOnContext()
-        {
-            //Arrange
-            var mockDbSet = new Mock<DbSet<LogonAttempt>>();
-            var mockContext = new Mock<SystemAdminContext>();
-
-            mockContext.Setup(x => x.LogonAttempts).Returns(mockDbSet.Object);
-
-            var classUnderTest = new CRUD_Operations(mockContext.Object);
-
-            //Act
-            classUnderTest.DeleteLogonAttempt(1);
-
-            //Assert
-            mockDbSet.Verify(x => x.Remove(It.IsAny<LogonAttempt>()), Times.Once);
-            mockContext.Verify(x => x.SaveChanges(), Times.Once);
-        }
-
-
-
-        [Test]
         public void Test_GetAllLogonAttempts_ReturnsAllLogonAttempts_WhenCalled()
         {
             //Arrange
@@ -596,5 +288,314 @@ namespace UnitTests
             Assert.AreEqual(expected[1].LogonDateTime, actual[1].LogonDateTime);
             Assert.AreEqual(expected[0].LogonSuccessful, actual[0].LogonSuccessful);
         }
+
+
+
+        [Test]
+        public void InsertUser_Calls_AddOnDbSet_And_SaveChangesOnContext_WhenCalled()
+        {
+            //Arrange
+            string FirstName = "Michael";
+            string LastName = "Hennigan";
+            string Email = "michael.hennigan@fdm.com";
+            string Password = "1234abcd";
+
+            var mockDbSet = new Mock<DbSet<User>>();
+            var mockContext = new Mock<SystemAdminContext>();
+
+            mockContext.Setup(x => x.Users).Returns(mockDbSet.Object);
+
+            var classUnderTest = new CRUD_Operations(mockContext.Object);
+
+            //Act
+            classUnderTest.InsertUser(FirstName, LastName, Email, Password);
+
+            //Assert
+            mockDbSet.Verify(x => x.Add(It.IsAny<User>()), Times.Once);
+            mockContext.Verify(x => x.SaveChanges(), Times.Once);
+        }
+
+
+
+        [Test]
+        public void InsertUserAccessGroup_Calls_AddOnDbSet_And_SaveChangesOnContext_WhenCalled()
+        {
+            //Arrange
+            string GroupName = "Test";
+
+            var mockDbSet = new Mock<DbSet<UserAccessGroup>>();
+            var mockContext = new Mock<SystemAdminContext>();
+
+            mockContext.Setup(x => x.AccessGroups).Returns(mockDbSet.Object);
+
+            var classUnderTest = new CRUD_Operations(mockContext.Object);
+
+            //Act
+            classUnderTest.InsertUserAccessGroup(GroupName);
+
+            //Assert
+            mockDbSet.Verify(x => x.Add(It.IsAny<UserAccessGroup>()), Times.Once);
+            mockContext.Verify(x => x.SaveChanges(), Times.Once);
+        }
+
+
+
+        [Test]
+        public void InsertServiceRequest_Calls_AddOnDbSet_And_SaveChangesOnContext_WhenCalled()
+        {
+            //Arrange
+            string UserFullName = "Joe Bloggs";
+            string RequestType = "Password Reset";
+            string Details = "Forgot Password";
+
+            var mockDbSet = new Mock<DbSet<ServiceRequest>>();
+            var mockContext = new Mock<SystemAdminContext>();
+
+            mockContext.Setup(x => x.ServiceRequests).Returns(mockDbSet.Object);
+
+            var classUnderTest = new CRUD_Operations(mockContext.Object);
+
+            //Act
+            classUnderTest.InsertServiceRequest(UserFullName, RequestType, Details);
+
+            //Assert
+            mockDbSet.Verify(x => x.Add(It.IsAny<ServiceRequest>()), Times.Once);
+            mockContext.Verify(x => x.SaveChanges(), Times.Once);
+        }
+
+
+
+        [Test]
+        public void RecordSuccessfulLogon_Calls_AddOnDbSet_And_SaveChangesOnContext_WhenCalled()
+        {
+            //Arrange
+            var mockDbSet = new Mock<DbSet<LogonAttempt>>();
+            var mockContext = new Mock<SystemAdminContext>();
+
+            mockContext.Setup(x => x.LogonAttempts).Returns(mockDbSet.Object);
+
+            var classUnderTest = new CRUD_Operations(mockContext.Object);
+
+            //Act
+            classUnderTest.RecordSuccessfulLogon();
+
+            //Assert
+            mockDbSet.Verify(x => x.Add(It.IsAny<LogonAttempt>()), Times.Once);
+            mockContext.Verify(x => x.SaveChanges(), Times.Once);
+        }
+
+
+
+        [Test]
+        public void RecordFailedLogon_Calls_AddOnDbSet_And_SaveChangesOnContext_WhenCalled()
+        {
+            //Arrange
+            var mockDbSet = new Mock<DbSet<LogonAttempt>>();
+            var mockContext = new Mock<SystemAdminContext>();
+
+            mockContext.Setup(x => x.LogonAttempts).Returns(mockDbSet.Object);
+
+            var classUnderTest = new CRUD_Operations(mockContext.Object);
+
+            //Act
+            classUnderTest.RecordFailedLogon();
+
+            //Assert
+            mockDbSet.Verify(x => x.Add(It.IsAny<LogonAttempt>()), Times.Once);
+            mockContext.Verify(x => x.SaveChanges(), Times.Once);
+        }
+
+
+
+        [Test]
+        public void DeleteUser_Calls_RemoveOnDbSet_And_SaveChangesOnContext()
+        {
+            //Arrange
+            var mockDbSet = new Mock<DbSet<User>>();
+            var mockContext = new Mock<SystemAdminContext>();
+
+            mockContext.Setup(x => x.Users).Returns(mockDbSet.Object);
+
+            var classUnderTest = new CRUD_Operations(mockContext.Object);
+
+            //Act
+            classUnderTest.DeleteUser(1);
+
+            //Assert
+            mockDbSet.Verify(x => x.Remove(It.IsAny<User>()), Times.Once);
+            mockContext.Verify(x => x.SaveChanges(), Times.Once);
+        }
+
+
+
+        [Test]
+        public void DeleteAccessGroup_Calls_RemoveOnDbSet_And_SaveChangesOnContext()
+        {
+            //Arrange
+            var mockDbSet = new Mock<DbSet<UserAccessGroup>>();
+            var mockContext = new Mock<SystemAdminContext>();
+
+            mockContext.Setup(x => x.AccessGroups).Returns(mockDbSet.Object);
+
+            var classUnderTest = new CRUD_Operations(mockContext.Object);
+
+            //Act
+            classUnderTest.DeleteAccessGroup(1);
+
+            //Assert
+            mockDbSet.Verify(x => x.Remove(It.IsAny<UserAccessGroup>()), Times.Once);
+            mockContext.Verify(x => x.SaveChanges(), Times.Once);
+        }
+
+
+
+        [Test]
+        public void DeleteServiceRequest_Calls_RemoveOnDbSet_And_SaveChangesOnContext()
+        {
+            //Arrange
+            var mockDbSet = new Mock<DbSet<ServiceRequest>>();
+            var mockContext = new Mock<SystemAdminContext>();
+
+            mockContext.Setup(x => x.ServiceRequests).Returns(mockDbSet.Object);
+
+            var classUnderTest = new CRUD_Operations(mockContext.Object);
+
+            //Act
+            classUnderTest.DeleteServiceRequest(1);
+
+            //Assert
+            mockDbSet.Verify(x => x.Remove(It.IsAny<ServiceRequest>()), Times.Once);
+            mockContext.Verify(x => x.SaveChanges(), Times.Once);
+        }
+
+
+
+        [Test]
+        public void DeleteLogonAttempt_Calls_RemoveOnDbSet_And_SaveChangesOnContext()
+        {
+            //Arrange
+            var mockDbSet = new Mock<DbSet<LogonAttempt>>();
+            var mockContext = new Mock<SystemAdminContext>();
+
+            mockContext.Setup(x => x.LogonAttempts).Returns(mockDbSet.Object);
+
+            var classUnderTest = new CRUD_Operations(mockContext.Object);
+
+            //Act
+            classUnderTest.DeleteLogonAttempt(1);
+
+            //Assert
+            mockDbSet.Verify(x => x.Remove(It.IsAny<LogonAttempt>()), Times.Once);
+            mockContext.Verify(x => x.SaveChanges(), Times.Once);
+        }
+
+
+
+        //[Test]
+        //public void RemoveUserFromGroup_Calls_FindBothOnDbSets_And_SaveChangesOnContext_WhenCalled()
+        //{
+        //    //Arrange
+        //    UserAccessGroup testGroup = new UserAccessGroup
+        //    {
+        //        UserAccessGroupID = 1,
+        //        GroupName = "test2"
+        //    };
+
+        //    User user = new User
+        //    {
+        //        UserID = 1,
+        //        FirstName = "Joe",
+        //        LastName = "Bloggs",
+        //        Email = "joe.bloggs@fdm.com",
+        //        Password = "abcd1234",
+        //        IsBanned = false
+        //    };
+
+        //    var mockDbSet = new Mock<DbSet<UserAccessGroup>>();
+        //    var mockDbSet2 = new Mock<DbSet<User>>();
+        //    var mockContext = new Mock<SystemAdminContext>();
+
+        //    mockDbSet.Setup(x => x.Find()).Returns(testGroup);
+        //    mockDbSet2.Setup(x => x.Find()).Returns(user);
+        //    mockContext.Setup(x => x.AccessGroups).Returns(mockDbSet.Object);
+        //    mockContext.Setup(x => x.Users).Returns(mockDbSet2.Object);
+
+        //    var classUnderTest = new CRUD_Operations(mockContext.Object);
+
+        //    //Act
+        //    classUnderTest.RemoveUserFromGroup(1, 1);
+
+        //    //Assert
+        //    mockDbSet.Verify(x => x.Find(1), Times.Once);
+        //    mockDbSet2.Verify(x => x.Find(1), Times.Once);
+        //    mockContext.Verify(x => x.SaveChanges(), Times.Once);
+        //}
+
+
+
+        //[Test]
+        //public void BanUser_Calls_FirstOrDefaultOnDbSet_And_SaveChangesOnContext()
+        //{
+        //    //Arrange
+        //    int UserID = 1;
+        //    User user = new User
+        //    {
+        //        UserID = 1,
+        //        FirstName = "Joe",
+        //        LastName = "Bloggs",
+        //        Email = "joe.bloggs@fdm.com",
+        //        Password = "abcd1234",
+        //        IsBanned = false
+        //    };
+
+        //    var mockDbSet = new Mock<DbSet<User>>();
+        //    var mockContext = new Mock<SystemAdminContext>();
+
+        //    mockDbSet.Setup(x => x.FirstOrDefault()).Returns(user);
+        //    mockContext.Setup(x => x.Users).Returns(mockDbSet.Object);
+
+        //    CRUD_Operations classUnderTest = new CRUD_Operations(mockContext.Object);
+
+        //    //Act
+        //    classUnderTest.BanUser(UserID);
+
+        //    //Assert
+        //    mockDbSet.Verify(x => x.FirstOrDefault(), Times.Once);
+        //    mockContext.Verify(x => x.SaveChanges(), Times.Once);
+        //}
+
+
+
+        //[Test]
+        //public void LiftBanOnUser_Calls_FirstOrDefaultOnDbSet_And_SaveChangesOnContext()
+        //{
+        //    //Arrange
+        //    int UserID = 1;
+        //    User user = new User
+        //    {
+        //        UserID = 1,
+        //        FirstName = "Joe",
+        //        LastName = "Bloggs",
+        //        Email = "joe.bloggs@fdm.com",
+        //        Password = "abcd1234",
+        //        IsBanned = false
+        //    };
+
+        //    var mockDbSet = new Mock<DbSet<User>>();
+        //    var mockContext = new Mock<SystemAdminContext>();
+
+        //    mockDbSet.Setup(x => x.FirstOrDefault()).Returns(user);
+        //    mockContext.Setup(x => x.Users).Returns(mockDbSet.Object);
+
+        //    CRUD_Operations classUnderTest = new CRUD_Operations(mockContext.Object);
+
+        //    //Act
+        //    classUnderTest.LiftBanOnUser(UserID);
+
+        //    //Assert
+        //    mockDbSet.Verify(x => x.FirstOrDefault(), Times.Once);
+        //    mockContext.Verify(x => x.SaveChanges(), Times.Once);
+        //}
+
     }
 }
