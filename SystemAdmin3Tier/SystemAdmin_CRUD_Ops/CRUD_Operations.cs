@@ -46,6 +46,43 @@ namespace SystemAdmin_CRUD_Ops
 
 
 
+        public List<User> GetAllUsers()
+        {
+            context.Database.Log = Console.WriteLine;
+            List<User> Users = context.Users.ToList();
+            return Users;
+        }
+
+
+
+        public List<UserAccessGroup> GetAllAccessGroups()
+        {
+            context.Database.Log = Console.WriteLine;
+            List<UserAccessGroup> AccessGroups = context.AccessGroups.ToList();
+            return AccessGroups;
+        }
+
+
+
+        public List<ServiceRequest> GetAllServiceRequests()
+        {
+            context.Database.Log = Console.WriteLine;
+            List<ServiceRequest> requests = context.ServiceRequests.ToList();
+            return requests;
+        }
+
+
+
+        public List<LogonAttempt> GetAllLogonAttempts()
+        {
+            context.Database.Log = Console.WriteLine;
+
+            List<LogonAttempt> attempts = context.LogonAttempts.ToList();
+            return attempts;
+        }
+
+
+
         public void InsertUser(string FirstName, string LastName,
             string Email, string Password)
         {
@@ -96,29 +133,75 @@ namespace SystemAdmin_CRUD_Ops
 
 
 
-        public List<User> GetAllUsers()
+        public void RecordSuccessfulLogon()
         {
             context.Database.Log = Console.WriteLine;
-            List<User> Users = context.Users.ToList();
-            return Users;
+
+            LogonAttempt success = new LogonAttempt();
+            success.LogonSuccessful = true;
+            success.LogonDateTime = DateTime.Now;
+
+            context.LogonAttempts.Add(success);
+            context.SaveChanges();
         }
 
 
 
-        public List<UserAccessGroup> GetAllAccessGroups()
+        public void RecordFailedLogon()
         {
             context.Database.Log = Console.WriteLine;
-            List<UserAccessGroup> AccessGroups = context.AccessGroups.ToList();
-            return AccessGroups;
+
+            LogonAttempt failed = new LogonAttempt();
+            failed.LogonSuccessful = false;
+            failed.LogonDateTime = DateTime.Now;
+
+            context.LogonAttempts.Add(failed);
+            context.SaveChanges();
         }
 
 
 
-        public List<ServiceRequest> GetAllServiceRequests()
+        public void DeleteUser(int UserID)
         {
             context.Database.Log = Console.WriteLine;
-            List<ServiceRequest> requests = context.ServiceRequests.ToList();
-            return requests;
+
+            User user = context.Users.Find(UserID);
+            context.Users.Remove(user);
+            context.SaveChanges();
+        }
+
+
+
+        public void DeleteAccessGroup(int AccessGroupID)
+        {
+            context.Database.Log = Console.WriteLine;
+
+            UserAccessGroup group = context.AccessGroups.Find(AccessGroupID);
+            context.AccessGroups.Remove(group);
+            context.SaveChanges();
+        }
+
+
+
+        public void DeleteServiceRequest(int RequestID)
+        {
+            context.Database.Log = Console.WriteLine;
+
+            ServiceRequest request = context.ServiceRequests.Find(RequestID);
+            context.ServiceRequests.Remove(request);
+            context.SaveChanges();
+        }        
+
+
+
+        public void DeleteLogonAttempt(int LogonAttemptID)
+        {
+            context.Database.Log = Console.WriteLine;
+
+            LogonAttempt attempt = context.LogonAttempts.Find(LogonAttemptID);
+
+            context.LogonAttempts.Remove(attempt);
+            context.SaveChanges();
         }
 
 
@@ -210,89 +293,6 @@ namespace SystemAdmin_CRUD_Ops
             request.Status = (RequestStatus)2;
             context.SaveChanges();
         }
-
-
-
-        public void DeleteUser(int UserID)
-        {
-            context.Database.Log = Console.WriteLine;
-
-            User user = context.Users.Find(UserID);
-            context.Users.Remove(user);
-            context.SaveChanges();
-        }
-
-
-
-        public void DeleteAccessGroup(int AccessGroupID)
-        {
-            context.Database.Log = Console.WriteLine;
-
-            UserAccessGroup group = context.AccessGroups.Find(AccessGroupID);
-            context.AccessGroups.Remove(group);
-            context.SaveChanges();
-        }
-
-
-
-        public void DeleteServiceRequest(int RequestID)
-        {
-            context.Database.Log = Console.WriteLine;
-
-            ServiceRequest request = context.ServiceRequests.Find(RequestID);
-            context.ServiceRequests.Remove(request);
-            context.SaveChanges();
-        }
-
-
-
-
-        public void RecordSuccessfulLogon()
-        {
-            context.Database.Log = Console.WriteLine;
-
-            LogonAttempt success = new LogonAttempt();
-            success.LogonSuccessful = true;
-            success.LogonDateTime = DateTime.Now;
-
-            context.LogonAttempts.Add(success);
-            context.SaveChanges();
-        }
-
-
-
-        public void RecordFailedLogon()
-        {
-            context.Database.Log = Console.WriteLine;
-
-            LogonAttempt failed = new LogonAttempt();
-            failed.LogonSuccessful = false;
-            failed.LogonDateTime = DateTime.Now;
-
-            context.LogonAttempts.Add(failed);
-            context.SaveChanges();
-        }
-
-
-
-        public void DeleteLogonAttempt(int LogonAttemptID)
-        {
-            context.Database.Log = Console.WriteLine;
-
-            LogonAttempt attempt = context.LogonAttempts.Find(LogonAttemptID);
-
-            context.LogonAttempts.Remove(attempt);
-            context.SaveChanges();
-        }
-
-
-
-        public List<LogonAttempt> GetAllLogonAttempts()
-        {
-            context.Database.Log = Console.WriteLine;
-
-            List<LogonAttempt> attempts = context.LogonAttempts.ToList();
-            return attempts;
-        }
+        
     }
 }
