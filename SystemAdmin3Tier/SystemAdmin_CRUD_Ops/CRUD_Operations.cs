@@ -269,7 +269,9 @@ namespace SystemAdmin_CRUD_Ops
         {
             context.Database.Log = Console.WriteLine;
 
-            ServiceRequest request = context.ServiceRequests.Where(
+            //  ServiceRequest request = context.ServiceRequests.Where(
+            //      n => n.ServiceRequestID == RequestID).FirstOrDefault();
+            ServiceRequest request = context.ServiceRequests.Find(
                 n => n.ServiceRequestID == RequestID).FirstOrDefault();
 
             request.AdminOperator = AdminName;
@@ -283,7 +285,9 @@ namespace SystemAdmin_CRUD_Ops
         {
             context.Database.Log = Console.WriteLine;
 
-            ServiceRequest request = context.ServiceRequests.Where(
+            //  ServiceRequest request = context.ServiceRequests.Where(
+            //      n => n.ServiceRequestID == RequestID).FirstOrDefault();
+            ServiceRequest request = context.ServiceRequests.Find(
                 n => n.ServiceRequestID == RequestID).FirstOrDefault();
 
             request.AdditionalInfo = AdditionalInfo;
@@ -296,7 +300,9 @@ namespace SystemAdmin_CRUD_Ops
         {
             context.Database.Log = Console.WriteLine;
 
-            ServiceRequest request = context.ServiceRequests.Where(
+            //  ServiceRequest request = context.ServiceRequests.Where(
+            //      n => n.ServiceRequestID == RequestID).FirstOrDefault();
+            ServiceRequest request = context.ServiceRequests.Find(
                 n => n.ServiceRequestID == RequestID).FirstOrDefault();
 
             request.Status = (RequestStatus)2;
