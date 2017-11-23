@@ -252,8 +252,11 @@ namespace SystemAdmin_CRUD_Ops
         {
             context.Database.Log = Console.WriteLine;
 
-            UserAccessGroup group = context.AccessGroups.Find(GroupID);
-            User user = context.Users.Find(UserID);
+            //  UserAccessGroup group = context.AccessGroups.Find(GroupID);
+            //  User user = context.Users.Find(UserID);
+            User user = context.Users.Find(n => n.UserID == UserID).FirstOrDefault();
+            UserAccessGroup accessGroup = context.AccessGroups.Find(n =>
+                n.UserAccessGroupID == GroupID).FirstOrDefault();
 
             context.Entry(group).Collection("Users").Load();
             group.Users.Remove(user);
