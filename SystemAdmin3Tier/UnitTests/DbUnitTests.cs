@@ -78,11 +78,7 @@ namespace UnitTests
             var actual = classUnderTest.GetAllUsers();
 
             //Assert
-            //CollectionAssert.AreEqual(expected, actual);
-
             Assert.AreEqual(2, actual.Count);
-            Assert.AreEqual("Joe", actual[0].FirstName);
-            Assert.AreEqual("Jane", actual[1].FirstName);
 
             Assert.AreEqual(expected[0].UserID, actual[0].UserID);
             Assert.AreEqual(expected[0].FirstName, actual[0].FirstName);
@@ -143,7 +139,6 @@ namespace UnitTests
             var actual = classUnderTest.GetAllAccessGroups();
 
             //Assert
-            //CollectionAssert.AreEqual(expected, actual);
             Assert.AreEqual(expected.Count, actual.Count);
             Assert.AreEqual(expected[0].UserAccessGroupID, actual[0].UserAccessGroupID);
             Assert.AreEqual(expected[1].UserAccessGroupID, actual[1].UserAccessGroupID);
