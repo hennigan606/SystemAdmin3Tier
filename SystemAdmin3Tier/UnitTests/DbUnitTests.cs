@@ -606,5 +606,73 @@ namespace UnitTests
             mockContext.Verify(x => x.SaveChanges(), Times.Once);
         }
 
+
+
+        [Test]
+        public void AssignAdminToRequest_CallsFindOnDbSetAndSaveChangesOnContext_WhenCalled()
+        {
+            //Arrange
+            int TestRequestID = 1;
+            string TestAdminName = "Joe Admin";
+
+            var MockDbSet = new Mock<DbSet<ServiceRequest>>();
+            var MockContext = new Mock<SystemAdminContext>();
+
+            MockContext.Setup(x => x.ServiceRequests).Returns(MockDbSet.Object);
+
+            CRUD_Operations ClassUnderTest = new CRUD_Operations(MockContext.Object);
+
+            //Act
+            ClassUnderTest.AssignAdminToRequest(TestRequestID, TestAdminName);
+
+            //Assert
+            MockDbSet.Verify(x => x.Find(It.IsAny<ServiceRequest>()), Times.Once);
+            MockContext.Verify(x => x.SaveChanges(), Times.Once);
+        }
+
+
+
+        public void ProvideInfo_CallsFindOnDbSetAndSaveChangesOnContext_WhenCalled()
+        {
+            //Arrange
+            int TestRequestID = 1;
+            string TestInfo = "Request will be complete in 2 hours";
+
+            var MockDbSet = new Mock<DbSet<ServiceRequest>>();
+            var MockContext = new Mock<SystemAdminContext>();
+
+            MockContext.Setup(x => x.ServiceRequests).Returns(MockDbSet.Object);
+
+            CRUD_Operations ClassUnderTest = new CRUD_Operations(MockContext.Object);
+
+            //Act
+            ClassUnderTest.ProvideInfo(TestRequestID, TestInfo);
+
+            //Assert
+            MockDbSet.Verify(x => x.Find(It.IsAny<ServiceRequest>()), Times.Once);
+            MockContext.Verify(x => x.SaveChanges(), Times.Once);
+        }
+
+
+
+        public void MarkAsComplete_CallsFindOnDbSetAndSaveChangesOnContext_WhenCalled()
+        {
+            //Arrange
+            int TestRequestID = 1;
+
+            var MockDbSet = new Mock<DbSet<ServiceRequest>>();
+            var MockContext = new Mock<SystemAdminContext>();
+
+            MockContext.Setup(x => x.ServiceRequests).Returns(MockDbSet.Object);
+
+            CRUD_Operations ClassUnderTest = new CRUD_Operations(MockContext.Object);
+
+            //Act
+            ClassUnderTest.MarkAsComplete(TestRequestID);
+
+            //Assert
+            MockDbSet.Verify(x => x.Find(It.IsAny<ServiceRequest>()), Times.Once);
+            MockContext.Verify(x => x.SaveChanges(), Times.Once);
+        }
     }
 }
