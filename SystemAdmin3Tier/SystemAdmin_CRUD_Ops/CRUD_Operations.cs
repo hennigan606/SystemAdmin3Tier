@@ -210,7 +210,7 @@ namespace SystemAdmin_CRUD_Ops
         {
             context.Database.Log = Console.WriteLine;
 
-            //User user = context.Users.Where(n => n.UserID == UserID).FirstOrDefault();
+            //  User user = context.Users.Where(n => n.UserID == UserID).FirstOrDefault();
             User user = context.Users.Find(n => n.UserID == UserID).FirstOrDefault();
             user.IsBanned = true;
             context.SaveChanges();
@@ -222,7 +222,7 @@ namespace SystemAdmin_CRUD_Ops
         {
             context.Database.Log = Console.WriteLine;
 
-            //User user = context.Users.Where(n => n.UserID == UserID).FirstOrDefault();
+            //  User user = context.Users.Where(n => n.UserID == UserID).FirstOrDefault();
             User user = context.Users.Find(n => n.UserID == UserID).FirstOrDefault();
             user.IsBanned = false;
             context.SaveChanges();
@@ -234,8 +234,12 @@ namespace SystemAdmin_CRUD_Ops
         {
             context.Database.Log = Console.WriteLine;
 
-            User user = context.Users.Where(n => n.UserID == UserID).FirstOrDefault();
-            UserAccessGroup accessGroup = context.AccessGroups.Where(n =>
+            //  User user = context.Users.Where(n => n.UserID == UserID).FirstOrDefault();
+            //  UserAccessGroup accessGroup = context.AccessGroups.Where(n =>
+            //      n.UserAccessGroupID == GroupID).FirstOrDefault();
+
+            User user = context.Users.Find(n => n.UserID == UserID).FirstOrDefault();
+            UserAccessGroup accessGroup = context.AccessGroups.Find(n =>
                 n.UserAccessGroupID == GroupID).FirstOrDefault();
 
             accessGroup.Users.Add(user);
