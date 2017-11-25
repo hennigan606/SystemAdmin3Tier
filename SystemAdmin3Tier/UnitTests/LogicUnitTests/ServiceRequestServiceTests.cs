@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Moq;
-using SystemAdminClasses;
 using SystemAdmin_CRUD_Ops;
+using System;
 
 namespace UnitTests.LogicUnitTests
 {
@@ -65,7 +64,7 @@ namespace UnitTests.LogicUnitTests
             RqstService.AssignOperator(TestRequestID, TestAdminName);
 
             //Assert
-            MockCRUD.Verify(x => x.AssignAdminToRequest(It.IsAny<int>(), It.IsAny<String>());
+            MockCRUD.Verify(x => x.AssignAdminToRequest(It.IsAny<int>(), It.IsAny<String>()), Times.Once);
         }
 
 
@@ -83,12 +82,12 @@ namespace UnitTests.LogicUnitTests
             RqstService.AssignOperator(TestRequestID, TestAdminName);
 
             //Assert
-            MockCRUD.Verify(x => x.AssignAdminToRequest(TestRequestID, TestAdminName);
+            MockCRUD.Verify(x => x.AssignAdminToRequest(TestRequestID, TestAdminName), Times.Once);
         }
 
 
         [Test]
-        public void ProvideInfo_CallsCRUD.ProvideInfo_ExactlyOnce_WhenCalled()
+        public void ProvideInfo_CallsCRUD_ProvideInfo_ExactlyOnce_WhenCalled()
         {
             int TestRequestID = 1;
             String TestInfo = "Request will be complete in 2 hours";
@@ -101,12 +100,12 @@ namespace UnitTests.LogicUnitTests
             RqstService.ProvideInfo(TestRequestID, TestInfo);
 
             //Assert
-            MockCRUD.Verify(x => x.ProvideInfo(It.IsAny<int>(), It.IsAny<String>());
+            MockCRUD.Verify(x => x.ProvideInfo(It.IsAny<int>(), It.IsAny<String>()), Times.Once);
         }
 
 
         [Test]
-        public void ProvideInfo_CallsCRUD.ProvideInfo_PassingTheIDAndInfoProvided_ExactlyOnce_WhenCalled()
+        public void ProvideInfo_CallsCRUD_ProvideInfo_PassingTheIDAndInfoProvided_ExactlyOnce_WhenCalled()
         {
             int TestRequestID = 1;
             String TestInfo = "Request will be complete in 2 hours";
@@ -119,12 +118,12 @@ namespace UnitTests.LogicUnitTests
             RqstService.ProvideInfo(TestRequestID, TestInfo);
 
             //Assert
-            MockCRUD.Verify(x => x.ProvideInfo(TestRequestID, TestInfo);
+            MockCRUD.Verify(x => x.ProvideInfo(TestRequestID, TestInfo), Times.Once);
         }
 
 
         [Test]
-        public void MarkAsComplete_CallsCRUD.MarkAsComplete_ExactlyOnce_WhenCalled()
+        public void MarkAsComplete_CallsCRUD_MarkAsComplete_ExactlyOnce_WhenCalled()
         {
             //Arrange
             int TestRequestID = 1;
@@ -142,7 +141,7 @@ namespace UnitTests.LogicUnitTests
 
 
         [Test]
-        public void MarkAsComplete_CallsCRUD.MarkAsComplete_PassingItTheProvidedID_ExactlyOnce_WhenCalled()
+        public void MarkAsComplete_CallsCRUD_MarkAsComplete_PassingItTheProvidedID_ExactlyOnce_WhenCalled()
         {
             //Arrange
             int TestRequestID = 1;

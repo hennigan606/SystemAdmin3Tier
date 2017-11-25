@@ -210,8 +210,7 @@ namespace SystemAdmin_CRUD_Ops
         {
             context.Database.Log = Console.WriteLine;
 
-            //  User user = context.Users.Where(n => n.UserID == UserID).FirstOrDefault();
-            User user = context.Users.Find(n => n.UserID == UserID).FirstOrDefault();
+            User user = context.Users.Find(UserID);
             user.IsBanned = true;
             context.SaveChanges();
         }
@@ -222,8 +221,7 @@ namespace SystemAdmin_CRUD_Ops
         {
             context.Database.Log = Console.WriteLine;
 
-            //  User user = context.Users.Where(n => n.UserID == UserID).FirstOrDefault();
-            User user = context.Users.Find(n => n.UserID == UserID).FirstOrDefault();
+            User user = context.Users.Find(UserID);
             user.IsBanned = false;
             context.SaveChanges();
         }
@@ -234,13 +232,8 @@ namespace SystemAdmin_CRUD_Ops
         {
             context.Database.Log = Console.WriteLine;
 
-            //  User user = context.Users.Where(n => n.UserID == UserID).FirstOrDefault();
-            //  UserAccessGroup accessGroup = context.AccessGroups.Where(n =>
-            //      n.UserAccessGroupID == GroupID).FirstOrDefault();
-
-            User user = context.Users.Find(n => n.UserID == UserID).FirstOrDefault();
-            UserAccessGroup accessGroup = context.AccessGroups.Find(n =>
-                n.UserAccessGroupID == GroupID).FirstOrDefault();
+            User user = context.Users.Find(UserID);
+            UserAccessGroup accessGroup = context.AccessGroups.Find(GroupID);
 
             accessGroup.Users.Add(user);
             context.SaveChanges();
@@ -252,11 +245,8 @@ namespace SystemAdmin_CRUD_Ops
         {
             context.Database.Log = Console.WriteLine;
 
-            //  UserAccessGroup group = context.AccessGroups.Find(GroupID);
-            //  User user = context.Users.Find(UserID);
-            User user = context.Users.Find(n => n.UserID == UserID).FirstOrDefault();
-            UserAccessGroup accessGroup = context.AccessGroups.Find(n =>
-                n.UserAccessGroupID == GroupID).FirstOrDefault();
+            UserAccessGroup group = context.AccessGroups.Find(GroupID);
+            User user = context.Users.Find(UserID);
 
             context.Entry(group).Collection("Users").Load();
             group.Users.Remove(user);
@@ -269,10 +259,7 @@ namespace SystemAdmin_CRUD_Ops
         {
             context.Database.Log = Console.WriteLine;
 
-            //  ServiceRequest request = context.ServiceRequests.Where(
-            //      n => n.ServiceRequestID == RequestID).FirstOrDefault();
-            ServiceRequest request = context.ServiceRequests.Find(
-                n => n.ServiceRequestID == RequestID).FirstOrDefault();
+            ServiceRequest request = context.ServiceRequests.Find(RequestID);
 
             request.AdminOperator = AdminName;
             request.Status = (RequestStatus)1;
@@ -285,10 +272,7 @@ namespace SystemAdmin_CRUD_Ops
         {
             context.Database.Log = Console.WriteLine;
 
-            //  ServiceRequest request = context.ServiceRequests.Where(
-            //      n => n.ServiceRequestID == RequestID).FirstOrDefault();
-            ServiceRequest request = context.ServiceRequests.Find(
-                n => n.ServiceRequestID == RequestID).FirstOrDefault();
+            ServiceRequest request = context.ServiceRequests.Find(RequestID);
 
             request.AdditionalInfo = AdditionalInfo;
             context.SaveChanges();
@@ -300,10 +284,7 @@ namespace SystemAdmin_CRUD_Ops
         {
             context.Database.Log = Console.WriteLine;
 
-            //  ServiceRequest request = context.ServiceRequests.Where(
-            //      n => n.ServiceRequestID == RequestID).FirstOrDefault();
-            ServiceRequest request = context.ServiceRequests.Find(
-                n => n.ServiceRequestID == RequestID).FirstOrDefault();
+            ServiceRequest request = context.ServiceRequests.Find(RequestID);
 
             request.Status = (RequestStatus)2;
             context.SaveChanges();
